@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import NavegacionLibroAsistencias from './components/NavegacionLibroAsistencias';
+import Home from './views/Home';
+import NuevoTrabajador from './views/NuevoTrabajador';
+import NuevoDia from './views/NuevoDia';
+import LibroDeAsistencia from './views/LibroDeAsistencia.jsx';
+import PresenteMes from './views/PresenteMes';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App flex">
+        <Navbar/>
+        <NavegacionLibroAsistencias>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/nuevo-trabajador' element={<NuevoTrabajador/>}/>
+                <Route path='/nuevo-dia' element={<NuevoDia/>}/>
+                <Route path='/libro-de-asistencias' element={<LibroDeAsistencia/>}/>
+                <Route path='/libro-de-asistencias/presente-mes/:id' element={<PresenteMes/>}/>
+            </Routes>
+        </NavegacionLibroAsistencias>
     </div>
   );
 }
