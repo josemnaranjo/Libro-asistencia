@@ -10,7 +10,7 @@ import PresenteMes from './views/PresenteMes';
 
 function App() {
   return (
-    <div className="App flex">
+    <div className="App flex font-poppins">
         <Navbar/>
         <NavegacionLibroAsistencias>
             <Routes>
