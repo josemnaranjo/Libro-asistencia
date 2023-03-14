@@ -21,6 +21,6 @@ export const addTrabajador = async(req,res)=>{
         res.json({message:"Trabajador creado exitosamente", newTrabajador})
 
     }catch(err){
-        res.status(500).json({error:"Algo salió mal"})
+        res.status(500).json({error:"Algo salió mal al crear el nuevo trabajador"})
     }
 };
