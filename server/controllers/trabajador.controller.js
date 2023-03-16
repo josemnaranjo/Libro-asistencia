@@ -13,14 +13,15 @@ let fechaAno = date.getFullYear();
 
 export const addTrabajador = async(req,res)=>{
     try{
+        const {name,lastName,rut} = req.body;
         const newTrabajador = await Trabajador.create({
-            name:req.body.name,
-            lastName:req.body.lastName,
-            rut: req.body.rut
+            name:name,
+            lastName:lastName,
+            rut:rut
         });
         res.json({message:"Trabajador creado exitosamente", newTrabajador})
 
     }catch(err){
-        res.status(500).json({error:"Algo salió mal al crear el nuevo trabajador"})
+        res.status(500).json({error:"Algo salió mal al crear el nuevo trabajador",err})
     }
 };

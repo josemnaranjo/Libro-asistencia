@@ -9,13 +9,15 @@ const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const port = 8000;
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 app.use(express.static(__dirname + '/public' ));
 
-app.use(cors({credentials:false, origin:'http://localhost:3000'}));
+app.use(cors({origin:'http://localhost:3000'}));
+
 
 //aqui van las rutas
 app.use(trabajadorRoutes);
@@ -25,8 +27,8 @@ async function main (){
     try{
         await sequelize.sync();
         console.log("Conexión con la base de datos exitosa");
-        app.listen(3000, ()=>{
-            console.log("Escuchando al puerto 3000");
+        app.listen(port, ()=>{
+            console.log("Escuchando al puerto",port);
         });
     }catch(err){
         console.log("Error al conectarse con la base de datos o el servidor", err)

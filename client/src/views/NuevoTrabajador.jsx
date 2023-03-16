@@ -1,9 +1,18 @@
 import React from 'react';
 import {Formik, Field,Form} from 'formik';
 import * as Yup from 'yup';
+import { addTrabajador } from '../services/trabajador.services';
 
 const NuevoTrabajador = () => {
-    //agregar alert cuando se agrega un nuevo trabajador
+    const addTrabajadorFromService = async (values) =>{
+        try{
+            await addTrabajador(values);
+            //agregar alert cuando se agrega un nuevo trabajador
+        }catch(err){
+            console.log(err)
+        }
+    }
+    
     const valSchema = Yup.object().shape({
         name: Yup.string()
         .min(3,"El nombre del trabajador debe tener más de 3 caracteres")
@@ -35,7 +44,9 @@ const NuevoTrabajador = () => {
 
                         validationSchema={valSchema}
                         //agregar servicio de agregar trabajador
-                        onSubmit={values=>console.log(values)}
+                        onSubmit={(values,{resetForm})=>{addTrabajadorFromService(values);
+                        resetForm();
+                    }}
                         enableReinitialize
                     >
                     {({errors,touched})=>(
@@ -44,19 +55,19 @@ const NuevoTrabajador = () => {
                                 <div>
                                     <div>
                                         <label htmlFor='name'>Nombre:</label>
-                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 rounded-lg border border-stone-400'/>
+                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400'/>
                                         {errors.name && touched.name ? <p className='text-red-600'>{errors.name}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='lastName'>Apellido:</label>
-                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.lastName && touched.lastName ? <p className='text-red-600'>{errors.lastName}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='rut'>Rut:</label>
-                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.rut && touched.rut ? <p className='text-red-600'>{errors.rut}</p>: null}
                                     </div>
                                 </div>
@@ -91,19 +102,19 @@ const NuevoTrabajador = () => {
                                 <div>
                                     <div>
                                         <label htmlFor='name'>Nombre:</label>
-                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 rounded-lg border border-stone-400'/>
+                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400'/>
                                         {errors.name && touched.name ? <p className='text-red-600'>{errors.name}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='lastName'>Apellido:</label>
-                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.lastName && touched.lastName ? <p className='text-red-600'>{errors.lastName}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='rut'>Rut:</label>
-                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.rut && touched.rut ? <p className='text-red-600'>{errors.rut}</p>: null}
                                     </div>
                                 </div>
@@ -138,19 +149,19 @@ const NuevoTrabajador = () => {
                                 <div>
                                     <div>
                                         <label htmlFor='name'>Nombre:</label>
-                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 rounded-lg border border-stone-400'/>
+                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400'/>
                                         {errors.name && touched.name ? <p className='text-red-600'>{errors.name}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='lastName'>Apellido:</label>
-                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.lastName && touched.lastName ? <p className='text-red-600'>{errors.lastName}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='rut'>Rut:</label>
-                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.rut && touched.rut ? <p className='text-red-600'>{errors.rut}</p>: null}
                                     </div>
                                 </div>

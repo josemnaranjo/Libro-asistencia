@@ -15,7 +15,6 @@ export const Trabajador = sequelize.define('Trabajador', {
                 msg:"El nombre solo puede contener letras"
             },
             notEmpty:true,
-            allowNull:false,
             max:10,
             min:4,
         }
@@ -27,7 +26,6 @@ export const Trabajador = sequelize.define('Trabajador', {
                 msg:"El apellido solo puede contener letras"
             },
             notEmpty:true,
-            allowNull:false,
             max:10,
             min:4,
         }
@@ -37,7 +35,6 @@ export const Trabajador = sequelize.define('Trabajador', {
         type:DataTypes.STRING,
         validate:{
             notEmpty:true,
-            allowNull:false,
         }
     }
 },{
