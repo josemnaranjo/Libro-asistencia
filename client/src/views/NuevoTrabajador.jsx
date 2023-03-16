@@ -55,19 +55,19 @@ const NuevoTrabajador = () => {
                                 <div>
                                     <div>
                                         <label htmlFor='name'>Nombre:</label>
-                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400'/>
+                                        <Field id='name' type='text' name='name' className='text-xs bg-slate-200 mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
                                         {errors.name && touched.name ? <p className='text-red-600'>{errors.name}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='lastName'>Apellido:</label>
-                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='lastName' type='text' name='lastName' className='text-xs bg-slate-200 mx-2 mt-5 w-64 p-1 rounded-lg border border-stone-400'/>
                                         {errors.lastName && touched.lastName ? <p className='text-red-600'>{errors.lastName}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='rut'>Rut:</label>
-                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='rut' type='text' name='rut' className='text-xs bg-slate-200 ml-9 w-64 p-1 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.rut && touched.rut ? <p className='text-red-600'>{errors.rut}</p>: null}
                                     </div>
                                 </div>
@@ -93,7 +93,9 @@ const NuevoTrabajador = () => {
 
                         validationSchema={valSchema}
                         //agregar servicio de agregar trabajador
-                        onSubmit={values=>console.log(values)}
+                        onSubmit={(values,{resetForm})=>{addTrabajadorFromService(values);
+                            resetForm();
+                        }}
                         enableReinitialize
                     >
                     {({errors,touched})=>(
@@ -102,19 +104,19 @@ const NuevoTrabajador = () => {
                                 <div>
                                     <div>
                                         <label htmlFor='name'>Nombre:</label>
-                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400'/>
+                                        <Field id='name' type='text' name='name' className='text-xs bg-slate-200 mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
                                         {errors.name && touched.name ? <p className='text-red-600'>{errors.name}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='lastName'>Apellido:</label>
-                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='lastName' type='text' name='lastName' className='text-xs bg-slate-200 mx-2 mt-5 w-64 p-1 rounded-lg border border-stone-400'/>
                                         {errors.lastName && touched.lastName ? <p className='text-red-600'>{errors.lastName}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='rut'>Rut:</label>
-                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='rut' type='text' name='rut' className='text-xs bg-slate-200 ml-9 w-64 p-1 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.rut && touched.rut ? <p className='text-red-600'>{errors.rut}</p>: null}
                                     </div>
                                 </div>
@@ -140,7 +142,9 @@ const NuevoTrabajador = () => {
 
                         validationSchema={valSchema}
                         //agregar servicio de agregar trabajador
-                        onSubmit={values=>console.log(values)}
+                        onSubmit={(values,{resetForm})=>{addTrabajadorFromService(values);
+                            resetForm();
+                        }}
                         enableReinitialize
                     >
                     {({errors,touched})=>(
@@ -149,19 +153,19 @@ const NuevoTrabajador = () => {
                                 <div>
                                     <div>
                                         <label htmlFor='name'>Nombre:</label>
-                                        <Field id='name' type='text' name='name' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400'/>
+                                        <Field id='name' type='text' name='name' className='text-xs bg-slate-200 mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
                                         {errors.name && touched.name ? <p className='text-red-600'>{errors.name}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='lastName'>Apellido:</label>
-                                        <Field id='lastName' type='text' name='lastName' className='bg-slate-200 mx-2 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='lastName' type='text' name='lastName' className='text-xs bg-slate-200 mx-2 mt-5 w-64 p-1 rounded-lg border border-stone-400'/>
                                         {errors.lastName && touched.lastName ? <p className='text-red-600'>{errors.lastName}</p>: null}
                                     </div>
 
                                     <div>
                                         <label htmlFor='rut'>Rut:</label>
-                                        <Field id='rut' type='text' name='rut' className='bg-slate-200 ml-9 w-64 pl-1.5 rounded-lg border border-stone-400 mt-5'/>
+                                        <Field id='rut' type='text' name='rut' className='text-xs bg-slate-200 ml-9 w-64 p-1 rounded-lg border border-stone-400 mt-5'/>
                                         {errors.rut && touched.rut ? <p className='text-red-600'>{errors.rut}</p>: null}
                                     </div>
                                 </div>
