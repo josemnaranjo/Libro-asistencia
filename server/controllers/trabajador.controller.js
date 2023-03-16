@@ -25,3 +25,27 @@ export const addTrabajador = async(req,res)=>{
         res.status(500).json({error:"Algo salió mal al crear el nuevo trabajador",err})
     }
 };
+
+export const getAllTrabajadores = async (req,res)=> {
+    try{
+        const trabajadores = await Trabajador.findAll();
+        res.json(trabajadores);
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al solicitar a los trabajadores de la base de datos",err})
+    }
+};
+
+export const deleteOneTrabajador = async (req,res)=>{
+    try{
+        const {rut} = req.body;
+        await Trabajador.destroy({
+            where:{
+                rut: rut
+            }
+        })
+        res.json({menssage: "Trabajador eliminado de la base de datos"});
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al intentar eliminar al trbajador de la base de datos",err})
+    }
+}
