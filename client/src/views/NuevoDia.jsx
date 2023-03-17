@@ -25,7 +25,8 @@ const NuevoDia = () => {
                         date:'',
                         checked: []
                     }}
-                    onSubmit={(values)=>{console.log(values)}}
+                    onSubmit={(values,{resetForm})=>{console.log(values);
+                        resetForm();}}
                 >
                     <Form >
                         <div className='text-center'>
