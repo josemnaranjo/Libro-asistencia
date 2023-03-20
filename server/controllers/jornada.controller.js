@@ -14,11 +14,7 @@ let fechaAno = date.getFullYear();
 
 export const addJornada = async(req,res)=> {
     try{
-        const { trabajadorId , date } = req.body;
-        const newJornada = await Jornada.create({
-            date,
-            trabajadorId
-        });
+        const newJornada = await Jornada.bulkCreate(req.body.jornada);
         res.json(newJornada);
     }catch(err){
         res.status(500).json({error:"Algo salió mal al crear la nueva jornada",err})
