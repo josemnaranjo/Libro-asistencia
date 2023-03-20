@@ -10,17 +10,13 @@ export const Jornada = sequelize.define('Jornada',{
     },
     date:{
         type:DataTypes.DATEONLY,
-        validate:{
-            notEmpty:true,
-        }
+        defaultValue: DataTypes.NOW
     },
     horaInicio:{
         type:DataTypes.TIME,
-        defaultValue:"00:00:00"
     },
     horaInicio:{
         type:DataTypes.TIME,
-        defaultValue:"00:00:00"
     }
 },{
     timestamps:false
