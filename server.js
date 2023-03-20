@@ -3,7 +3,8 @@ import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import {sequelize} from './server/config/mysql.config.js';
-import trabajadorRoutes from './server/routes/trabajador.routes.js'
+import trabajadorRoutes from './server/routes/trabajador.routes.js';
+import jornadaRoutes from './server/routes/Jornadas.routes.js';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors({origin:'http://localhost:3000'}));
 
 //aqui van las rutas
 app.use(trabajadorRoutes);
+app.use(jornadaRoutes);
 
 
 async function main (){
