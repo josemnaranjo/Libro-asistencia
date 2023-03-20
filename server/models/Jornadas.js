@@ -14,9 +14,11 @@ export const Jornada = sequelize.define('Jornada',{
     },
     horaInicio:{
         type:DataTypes.TIME,
+        defaultValue:"00:00:00"
     },
-    horaInicio:{
+    horaTermino:{
         type:DataTypes.TIME,
+        defaultValue:"00:00:00"
     }
 },{
     timestamps:false
