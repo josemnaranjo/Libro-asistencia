@@ -19,4 +19,4 @@ export const addJornada = async(req,res)=> {
     }catch(err){
         res.status(500).json({error:"Algo salió mal al crear la nueva jornada",err})
     }
-}
+};

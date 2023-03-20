@@ -1,4 +1,6 @@
 import { Trabajador } from "../models/Trabajador.js";
+import { Jornada } from "../models/Jornadas.js";
+import { Op } from 'sequelize';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {wb, colEstilo, contenidoEstilo } from '../config/excel4node.config.js';
@@ -47,5 +49,29 @@ export const deleteOneTrabajador = async (req,res)=>{
 
     }catch(err){
         res.status(500).json({error:"Algo salió mal al intentar eliminar al trbajador de la base de datos",err})
+    }
+};
+
+export const getAllTrabajadoresOfAJornada = async(req,res)=>{
+    try{
+        const { date } = req.body;
+
+        const jornadaWithDate = await Jornada.findAll({
+            where:{
+                date:date
+            }
+        });
+
+        const trabajadoresFiltrados = jornadaWithDate.map((trabajador)=>trabajador.trabajadorId);
+
+        const trabajadores = await Trabajador.findAll({
+            where:{
+                id: {[Op.in]:trabajadoresFiltrados}
+            }
+        })
+
+        res.json(trabajadores);
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
     }
 }
