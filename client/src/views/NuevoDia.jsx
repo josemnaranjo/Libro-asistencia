@@ -7,10 +7,13 @@ import {Formik, Form, Field} from 'formik';
 
 const NuevoDia = () => {
     const [trabajadores, setTrabajadores] = useState([]);
+    
     const newJornadaFromService = (values)=>{
-        const objPrincipal = {};
-        const arrPrincipal = [];
-
+        const date = values.date;
+        const idTrbajadores = values.trabajadorId;
+        const jornada =  idTrbajadores.map(((id,inx)=>({date:date,trabajadorId:id})));
+        const objPrincipal = {jornada};
+        console.log(objPrincipal);
     }
   
     const getAllTrabajadoresFromService =  async() => {
@@ -27,9 +30,9 @@ const NuevoDia = () => {
                 <Formik
                     initialValues={{
                         date:'',
-                        checked: []
+                        trabajadorId:''
                     }}
-                    onSubmit={(values,{resetForm})=>{console.log(values);
+                    onSubmit={(values,{resetForm})=>{newJornadaFromService(values);
                         resetForm();}}
                 >
                     <Form >
