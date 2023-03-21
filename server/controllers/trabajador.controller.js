@@ -54,7 +54,7 @@ export const deleteOneTrabajador = async (req,res)=>{
 
 export const getAllTrabajadoresOfAJornada = async(req,res)=>{
     try{
-        const { date } = req.body;
+        const { date } = req.params;
 
         const jornadaWithDate = await Jornada.findAll({
             where:{
@@ -70,7 +70,7 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
             }
         })
 
-        res.json(trabajadores);
+        res.json({trabajadores, jornadaWithDate});
     }catch(err){
         res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
     }

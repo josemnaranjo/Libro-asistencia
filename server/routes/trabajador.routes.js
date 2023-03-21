@@ -6,7 +6,7 @@ const router = Router();
 router.post('/api/crear-trabajador', addTrabajador);
 router.get('/api/get-all-trabajadores',getAllTrabajadores);
 router.delete('/api/delete-trabajador',deleteOneTrabajador);
-router.post('/api/obtener-jornada',getAllTrabajadoresOfAJornada);
+router.get('/api/obtener-jornada/:date',getAllTrabajadoresOfAJornada);
 
 
 export default router;
