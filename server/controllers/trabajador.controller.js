@@ -74,4 +74,6 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
     }catch(err){
         res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
     }
-}
+};
+
+
