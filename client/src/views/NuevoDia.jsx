@@ -1,6 +1,7 @@
 import {React, useState,useEffect}  from 'react';
 import { getAllTrabajadores } from '../services/trabajador.services';
 import {Formik, Form, Field} from 'formik';
+import {createNewJornada} from '../services/jornada.services.js';
 
 
 
@@ -8,13 +9,16 @@ import {Formik, Form, Field} from 'formik';
 const NuevoDia = () => {
     const [trabajadores, setTrabajadores] = useState([]);
     
-    const newJornadaFromService = (values)=>{
-        const date = values.date;
-        const idTrbajadores = values.trabajadorId;
-        const jornada =  idTrbajadores.map(((id)=>({date:date,trabajadorId:id})));
-        const objPrincipal = {jornada};
-        //falta crear servicio para enviar los datos
-        console.log(objPrincipal);
+    const newJornadaFromService = async(values)=>{
+        try{
+            const date = values.date;
+            const idTrbajadores = values.trabajadorId;
+            const jornada =  idTrbajadores.map(((id)=>({date:date,trabajadorId:id})));
+            const objPrincipal = {jornada};
+            await createNewJornada(objPrincipal);
+        }catch(err){
+            console.log(err)
+        }
     }
   
     const getAllTrabajadoresFromService =  async() => {
