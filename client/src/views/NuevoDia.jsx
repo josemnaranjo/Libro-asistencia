@@ -11,8 +11,9 @@ const NuevoDia = () => {
     const newJornadaFromService = (values)=>{
         const date = values.date;
         const idTrbajadores = values.trabajadorId;
-        const jornada =  idTrbajadores.map(((id,inx)=>({date:date,trabajadorId:id})));
+        const jornada =  idTrbajadores.map(((id)=>({date:date,trabajadorId:id})));
         const objPrincipal = {jornada};
+        //falta crear servicio para enviar los datos
         console.log(objPrincipal);
     }
   
