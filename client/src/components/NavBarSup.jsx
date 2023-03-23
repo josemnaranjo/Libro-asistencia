@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NavBarSup = () => {
 
@@ -9,9 +9,18 @@ const NavBarSup = () => {
 
     return (
         <div>
-            <nav className='bg-secondary-middle'>
-                <NavLink to={`/libro-de-asistencias/${hoy}`}/>
-                <NavLink to={`/libro-de-asistencias/${year}`}/>
+            <nav className='bg-secondary-light h-32 flex'>
+                <div>
+                    <Link to={`/libro-de-asistencias/${hoy}`} className="text-white">
+                        Hoy
+                    </Link>
+                </div>
+
+                <div>
+                    <Link to={`/libro-de-asistencias/year/${year}`} className="text-white">
+                        {year}
+                    </Link>
+                </div>
             </nav>
         </div>
     );
