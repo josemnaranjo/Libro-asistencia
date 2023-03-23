@@ -9,6 +9,7 @@ const Navbar = () => {
             >
                 <img src={require('../assets/images/LogoEmpresa.png')} alt="Logo Empresa" />
             </Link>
+            
             <div className='flex flex-col items-center mt-12'>
 
                 <Link

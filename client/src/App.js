@@ -7,6 +7,7 @@ import NuevoDia from './views/NuevoDia';
 import LibroDeAsistencia from './views/LibroDeAsistencia.jsx';
 import PresenteMes from './views/PresenteMes';
 import Hoy from './views/Hoy';
+import PresenteA from './views/PresenteA';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route path='/nuevo-dia' element={<NuevoDia/>}/>
                 <Route path='/libro-de-asistencias' element={<LibroDeAsistencia/>}/>
                 <Route path='/libro-de-asistencias/:date' element={<Hoy/>}/>
+                <Route path='/libro-de-asistencias/:year' element={<PresenteA/>}/>
                 <Route path='/libro-de-asistencias/presente-mes/:id' element={<PresenteMes/>}/>
             </Routes>
         </NavegacionLibroAsistencias>
