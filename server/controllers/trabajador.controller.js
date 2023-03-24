@@ -56,21 +56,21 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
     try{
         const { date } = req.params;
 
-        const jornadaWithDate = await Jornada.findAll({
+        const jornadaInfo = await Jornada.findAll({
             where:{
                 date:date
             }
         });
 
-        const trabajadoresFiltrados = jornadaWithDate.map((trabajador)=>trabajador.trabajadorId);
+        const trabajadoresFiltrados = jornadaInfo.map((trabajador)=>trabajador.trabajadorId);
 
-        const trabajadores = await Trabajador.findAll({
+        const trabajadoresInfo = await Trabajador.findAll({
             where:{
                 id: {[Op.in]:trabajadoresFiltrados}
             }
         })
 
-        res.json({trabajadores, jornadaWithDate});
+        res.json({trabajadoresInfo, jornadaInfo});
     }catch(err){
         res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
     }
