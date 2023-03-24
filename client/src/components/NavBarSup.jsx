@@ -6,6 +6,7 @@ const NavBarSup = () => {
     let date = new Date();
     let hoy = date.toISOString().split('T')[0];
     let year = date.getFullYear();
+    
 
     return (
         <div>

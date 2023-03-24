@@ -17,12 +17,13 @@ function App() {
         <NavegacionLibroAsistencias>
             <Routes>
                 <Route path='/' element={<Home/>}/>
-                <Route path='/nuevo-trabajador' element={<NuevoTrabajador/>}/>
-                <Route path='/nuevo-dia' element={<NuevoDia/>}/>
-                <Route path='/libro-de-asistencias' element={<LibroDeAsistencia/>}/>
-                <Route path='/libro-de-asistencias/:date' element={<Hoy/>}/>
-                <Route path='/libro-de-asistencias/year/:year' element={<PresenteA/>}/>
-                <Route path='/libro-de-asistencias/presente-mes/:id' element={<PresenteMes/>}/>
+                <Route path='nuevo-trabajador' element={<NuevoTrabajador/>}/>
+                <Route path='nuevo-dia' element={<NuevoDia/>}/>
+                <Route path='libro-de-asistencias' element={<LibroDeAsistencia/>}>
+                    <Route path=':date' element={<Hoy/>}/>
+                    <Route path='year/:year' element={<PresenteA/>}/>
+                    <Route path='presente-mes/:id' element={<PresenteMes/>}/>
+                </Route>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>
