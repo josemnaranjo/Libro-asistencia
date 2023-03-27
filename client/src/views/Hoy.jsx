@@ -32,8 +32,21 @@ const Hoy = () => {
                 <Formik>
                     <Form>
                         <div>
+                            <div>
+                            {
+                                trabajadoresInfo?.map((trabajador)=>(
+                                    <div className='' key={trabajador.id}>
+                                        <div>
+                                            <label>Nombre: {trabajador.name} {trabajador.lastName}</label>
+                                        </div>
+                                        <div>
+                                            <label>Rut: {trabajador.rut}</label>
+                                        </div>
+                                    </div>
+                                ))
 
-
+                            }
+                            </div>
                         </div>
                     </Form>
                 </Formik>
