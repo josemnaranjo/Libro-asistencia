@@ -28,14 +28,25 @@ const Hoy = () => {
     return (
         <div>
             <h1 className='text-center text-lg pt-3'>{date}</h1>
-            <div className='mt-9'>
-                <Formik>
-                    <Form>
-                        <div>
-                            <div>
-                            {
-                                trabajadoresInfo?.map((trabajador,n)=>(
+            {
+            trabajadoresInfo?.map((trabajador,n)=>(
+                
+                <div className='mt-9' key={trabajador.id}>
+                    
+                    <Formik
+                        initialValues={{
+                            horaInicio:{jornadaInfo},
+                            horaTermino:{jornadaInfo}
+                        }}
+                        onSubmit={(values)=>(console.log(values))}
+
+                        enableReinitialize
+                    >
+                        {
+                            props => (
+                                <Form>
                                     <div className='flex' key={trabajador.id}>
+
                                         <div>
                                             <label>Nombre: {trabajador.name} {trabajador.lastName}</label>
                                         </div>
@@ -43,22 +54,35 @@ const Hoy = () => {
                                             <label>Rut: {trabajador.rut}</label>
                                         </div>
                                         <div>
-                                            <label htmlFor="">Hora Inicio: {(jornadaInfo[n].horaInicio)} </label>
+                                            <label htmlFor="horaInicio">Hora Inicio:</label>
+                                            <Field name="horaInicio" value={props.jornadaInfo} ></Field>
                                         </div>
                                         <div>
-                                            <label htmlFor="">Hora Termino: {(jornadaInfo[n].horaTermino)} </label>
+                                            <label htmlFor="horaTermino">Hora Termino: </label>
+                                            <Field ></Field>
                                         </div>
-                                    </div>
-                                ))
+                                        <button className='bg-secondary-dark p-1.5 rounded-lg text-white'type='submit'>Guardar</button>
 
-                            }
-                            </div>
-                        </div>
-                    </Form>
-                </Formik>
-            </div>
+                                    </div>
+                                </Form>
+                            )
+                        }
+                    </Formik>
+
+                </div>
+                
+            ))
+            }
+            
         </div>
     );
 }
 
 export default Hoy;
+
+
+
+
+
+
+
