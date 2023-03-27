@@ -36,20 +36,3 @@ export const updateHoraDeLlegadaEnJornada = async(req,res)=>{
         res.status(500).json({error:"Algo salió mal al crear la nueva jornada",err})
     }
 };
-
-export const getJornadaInfoOfATrabajador = async(req,res) => {
-    try{
-        const {trabajadorId} = req.body;
-        const {date} =req.params;
-
-        const jornadaInfo = await Jornada.findAll({
-            where:{
-                date:date,
-                trabajadorId:trabajadorId
-            }
-        });
-        res.json({jornadaInfo});
-    }catch(err){
-        res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
-    }
-}

@@ -1,7 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
-import {getJornadaInfoOfATrabajador } from '../services/jornada.services.js';
 import {Formik,Field, Form} from 'formik'
 
 const Hoy = () => {
@@ -15,19 +14,12 @@ const Hoy = () => {
         try{
             const response = await getAllTrabajadoresOfAJornada(date);
             setTrabajadoresInfo(response.data.trabajadoresInfo);
+            setJornadaInfo(response.data.jornadaInfo);
         }catch(err){
             console.log(err)
         }
     };
 
-    const getJornadaInfoOfATrabajadorFromService = async(trabajadorId)=>{
-        try{
-            const response = await getJornadaInfoOfATrabajador(date,trabajadorId);
-            console.log(response.data);
-        }catch(err){
-            console.log(err)
-        }
-    }
 
     useEffect(() => {
         getAllTrabajadoresFromService();
@@ -43,9 +35,6 @@ const Hoy = () => {
 
 
                         </div>
-
-
-
                     </Form>
                 </Formik>
             </div>
