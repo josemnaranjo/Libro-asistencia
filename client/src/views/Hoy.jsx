@@ -40,26 +40,17 @@ const Hoy = () => {
             <div className='mt-9'>
                 <Formik>
                     <Form>
-                        <div className='flex'>
+                        <div>
                             {
                                 trabajadoresInfo?.map((trabajador)=>(
-                                    <div className='' key={trabajador.id}>
-                                        <div>
-                                            <label>Nombre: {trabajador.name} {trabajador.lastName}</label>
-                                        </div>
-                                        <div>
-                                            <label>Rut: {trabajador.rut}</label>
-                                        </div>
-                                        <div>
-                                            {
-                                                
-                                            }
-                                        </div>
-                                    </div>
-                                    
+                                    <label>{trabajador.name}</label>
                                 ))
-                                
                             }
+                            
+                            {
+                                jornadaInfo?.map((jornada)=>(<label>{jornada.horaInicio}</label>))
+                            }
+
 
                         </div>
 
