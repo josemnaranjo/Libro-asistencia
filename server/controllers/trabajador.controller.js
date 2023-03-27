@@ -70,7 +70,7 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
             }
         })
 
-        res.json({trabajadoresInfo, jornadaInfo});
+        res.json({trabajadoresInfo});
     }catch(err){
         res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
     }
