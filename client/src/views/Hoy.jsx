@@ -34,13 +34,19 @@ const Hoy = () => {
                         <div>
                             <div>
                             {
-                                trabajadoresInfo?.map((trabajador)=>(
-                                    <div className='' key={trabajador.id}>
+                                trabajadoresInfo?.map((trabajador,n)=>(
+                                    <div className='flex' key={trabajador.id}>
                                         <div>
                                             <label>Nombre: {trabajador.name} {trabajador.lastName}</label>
                                         </div>
                                         <div>
                                             <label>Rut: {trabajador.rut}</label>
+                                        </div>
+                                        <div>
+                                            <label htmlFor="">Hora Inicio: {(jornadaInfo[n].horaInicio)} </label>
+                                        </div>
+                                        <div>
+                                            <label htmlFor="">Hora Termino: {(jornadaInfo[n].horaTermino)} </label>
                                         </div>
                                     </div>
                                 ))
