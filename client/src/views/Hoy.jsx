@@ -36,7 +36,6 @@ const Hoy = () => {
     return (
         <div>
             <h1 className='text-center text-lg pt-3'>{date}</h1>
-
             <div className='mt-9'>
                 <Formik>
                     <Form>
