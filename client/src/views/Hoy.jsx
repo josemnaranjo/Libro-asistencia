@@ -56,7 +56,7 @@ const Hoy = () => {
                                         <div className=''>
                                             <div>
                                                 <label htmlFor="horaInicio">Hora Inicio:</label>
-                                                <Field name="horaInicio" value={props.jornadaInfo} className="w-20 ml-2 bg-slate-200 rounded-lg border border-stone-400" ></Field>
+                                                <Field name="horaInicio" placeholder="00:00:00" value={props.jornadaInfo} className="w-20 ml-2 px-1.5 py-0.5 bg-slate-200 rounded-lg border border-stone-400" ></Field>
                                             </div>
                                             <div className='flex mt-3 text-xs text-slate-900 antialiased'>
                                                 <label >Última hora registrada: </label>
@@ -66,7 +66,7 @@ const Hoy = () => {
                                         <div>
                                             <div>
                                                 <label htmlFor="horaTermino">Hora Termino: </label>
-                                                <Field name="horaTermino" value={props.jornadaInfo} className="w-20 ml-2 bg-slate-200 rounded-lg border border-stone-400" ></Field>
+                                                <Field name="horaTermino" placeholder="00:00:00" value={props.jornadaInfo} className="w-20 ml-2 px-1.5 py-0.5 bg-slate-200 rounded-lg border border-stone-400" ></Field>
                                             </div>
                                             <div className='flex mt-3 text-xs text-slate-900 antialiased'>
                                                 <label >Última hora registrada: </label>
