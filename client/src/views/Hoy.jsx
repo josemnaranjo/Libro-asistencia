@@ -9,6 +9,7 @@ const Hoy = () => {
     
     const [trabajadoresInfo, setTrabajadoresInfo] = useState([]);
     const [jornadaInfo, setJornadaInfo] = useState([]);
+    const [dato,setDato] = useState();
     const {date} = useParams();
 
     const getAllTrabajadoresFromService = async()=>{
@@ -23,8 +24,9 @@ const Hoy = () => {
 
     const updateHorasJornadaFromService = async(values)=>{
         try{
-            await updateHorasJornada(values);
-            console.log("Usuario actualizado con exito", values);
+            const response = await updateHorasJornada(values);
+            setDato(response.data);
+            
         }catch(err){
             console.log(err)
         }
@@ -33,7 +35,7 @@ const Hoy = () => {
 
     useEffect(() => {
         getAllTrabajadoresFromService();
-    }, []);
+    }, [dato]);
     
     return (
         <div>
