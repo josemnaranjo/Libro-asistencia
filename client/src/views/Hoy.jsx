@@ -36,9 +36,11 @@ const Hoy = () => {
                     <Formik
                         initialValues={{
                             horaInicio:'',
-                            horaTermino:''
+                            horaTermino:'',
+                            date: date,
+                            trabajadorId: trabajador.id
                         }}
-                        onSubmit={(values)=>(console.log(values,trabajador.id,date))}
+                        onSubmit={(values)=>(console.log(values))}
 
                         enableReinitialize
                     >
