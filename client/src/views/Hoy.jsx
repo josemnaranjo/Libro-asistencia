@@ -45,7 +45,7 @@ const Hoy = () => {
                         {
                             props => (
                                 <Form>
-                                    <div className='grid grid-cols-5 px-28' key={trabajador.id}>
+                                    <div className='grid grid-cols-5 justify-items-center' key={trabajador.id}>
 
                                         <div>
                                             <label>Nombre: {trabajador.name} {trabajador.lastName}</label>
@@ -53,15 +53,27 @@ const Hoy = () => {
                                         <div className=''>
                                             <label>Rut: {trabajador.rut}</label>
                                         </div>
-                                        <div>
-                                            <label htmlFor="horaInicio">Hora Inicio:</label>
-                                            <Field name="horaInicio" value={props.jornadaInfo} className="w-20 ml-2 bg-slate-200 rounded-lg border border-stone-400" ></Field>
+                                        <div className=''>
+                                            <div>
+                                                <label htmlFor="horaInicio">Hora Inicio:</label>
+                                                <Field name="horaInicio" value={props.jornadaInfo} className="w-20 ml-2 bg-slate-200 rounded-lg border border-stone-400" ></Field>
+                                            </div>
+                                            <div className='flex mt-3 text-xs text-slate-900 antialiased'>
+                                                <label >Última hora registrada: </label>
+                                                <p className='ml-2'>{jornadaInfo[n].horaInicio}</p>
+                                            </div>
                                         </div>
                                         <div>
-                                            <label htmlFor="horaTermino">Hora Termino: </label>
-                                            <Field name="horaTermino" value={props.jornadaInfo} className="w-20 ml-2 bg-slate-200 rounded-lg border border-stone-400" ></Field>
+                                            <div>
+                                                <label htmlFor="horaTermino">Hora Termino: </label>
+                                                <Field name="horaTermino" value={props.jornadaInfo} className="w-20 ml-2 bg-slate-200 rounded-lg border border-stone-400" ></Field>
+                                            </div>
+                                            <div className='flex mt-3 text-xs text-slate-900 antialiased'>
+                                                <label >Última hora registrada: </label>
+                                                <p className='ml-2'>{jornadaInfo[n].horaTermino}</p>
+                                            </div>
                                         </div>
-                                        <button className='bg-secondary-dark p-1 rounded-lg text-white'type='submit'>Guardar</button>
+                                        <button className='bg-secondary-dark rounded-lg text-white w-32 h-10'type='submit'>Actualizar</button>
 
                                     </div>
                                 </Form>
