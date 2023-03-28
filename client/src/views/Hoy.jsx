@@ -35,10 +35,10 @@ const Hoy = () => {
                     
                     <Formik
                         initialValues={{
-                            horaInicio:{jornadaInfo},
-                            horaTermino:{jornadaInfo}
+                            horaInicio:'',
+                            horaTermino:''
                         }}
-                        onSubmit={(values)=>(console.log(values))}
+                        onSubmit={(values)=>(console.log(values,trabajador.id,date))}
 
                         enableReinitialize
                     >
@@ -56,7 +56,7 @@ const Hoy = () => {
                                         <div className=''>
                                             <div>
                                                 <label htmlFor="horaInicio">Hora Inicio:</label>
-                                                <Field name="horaInicio" placeholder="00:00:00" value={props.jornadaInfo} className="w-20 ml-2  py-0.5 bg-slate-200 rounded-lg border border-stone-400 text-sm text-center" ></Field>
+                                                <Field name="horaInicio" placeholder="00:00:00" className="w-20 ml-2  py-0.5 bg-slate-200 rounded-lg border border-stone-400 text-sm text-center" ></Field>
                                             </div>
                                             <div className='flex mt-3 text-xs text-slate-900 antialiased'>
                                                 <label >Última hora registrada: </label>
@@ -66,7 +66,7 @@ const Hoy = () => {
                                         <div>
                                             <div>
                                                 <label htmlFor="horaTermino">Hora Termino: </label>
-                                                <Field name="horaTermino" placeholder="00:00:00" value={props.jornadaInfo} className="w-20 ml-2 py-0.5 bg-slate-200 rounded-lg border border-stone-400 text-sm text-center" ></Field>
+                                                <Field name="horaTermino" placeholder="00:00:00"  className="w-20 ml-2 py-0.5 bg-slate-200 rounded-lg border border-stone-400 text-sm text-center" ></Field>
                                             </div>
                                             <div className='flex mt-3 text-xs text-slate-900 antialiased'>
                                                 <label >Última hora registrada: </label>

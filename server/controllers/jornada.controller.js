@@ -23,8 +23,8 @@ export const addJornada = async(req,res)=> {
 
 export const updateHorasEnJornada = async(req,res)=>{
     try{
-        const {horaTermino, date, trabajadorId} =req.body;
-        await Jornada.update({horaTermino:horaTermino},{
+        const {horaInicio, horaTermino, date, trabajadorId} =req.body;
+        await Jornada.update({horaInicio:horaInicio,horaTermino:horaTermino},{
             where:{
                 trabajadorId:trabajadorId,
                 date:date
