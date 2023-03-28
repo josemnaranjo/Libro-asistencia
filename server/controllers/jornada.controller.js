@@ -21,7 +21,7 @@ export const addJornada = async(req,res)=> {
     }
 };
 
-export const updateHoraDeLlegadaEnJornada = async(req,res)=>{
+export const updateHorasEnJornada = async(req,res)=>{
     try{
         const {horaTermino, date, trabajadorId} =req.body;
         await Jornada.update({horaTermino:horaTermino},{

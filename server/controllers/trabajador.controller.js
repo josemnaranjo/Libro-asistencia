@@ -59,7 +59,10 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
         const jornadaInfo = await Jornada.findAll({
             where:{
                 date:date
-            }
+            },
+            order:[
+                ['trabajadorId', 'ASC']
+            ]
         });
 
         const trabajadoresFiltrados = jornadaInfo.map((trabajador)=>trabajador.trabajadorId);
@@ -67,7 +70,10 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
         const trabajadoresInfo = await Trabajador.findAll({
             where:{
                 id: {[Op.in]:trabajadoresFiltrados}
-            }
+            },
+            order:[
+                ['id', 'ASC']
+            ]
         })
 
         res.json({trabajadoresInfo,jornadaInfo});

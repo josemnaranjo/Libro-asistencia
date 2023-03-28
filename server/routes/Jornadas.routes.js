@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { addJornada, updateHoraDeLlegadaEnJornada  } from '../controllers/jornada.controller.js';
+import { addJornada, updateHorasEnJornada  } from '../controllers/jornada.controller.js';
 
 const router = Router();
 
 
 router.post('/api/crear-jornada',addJornada);
-router.put('/api/actualizar-hora-termino',updateHoraDeLlegadaEnJornada);
+router.put('/api/actualizar-hora-jornada',updateHorasEnJornada);
 
 
 export default router
