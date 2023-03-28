@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
+import {updateHorasJornada} from '../services/jornada.services.js';
 import {Formik,Field, Form} from 'formik'
 
 const Hoy = () => {
@@ -19,6 +20,15 @@ const Hoy = () => {
             console.log(err)
         }
     };
+
+    const updateHorasJornadaFromService = async(values)=>{
+        try{
+            await updateHorasJornada(values);
+            console.log("Usuario actualizado con exito", values);
+        }catch(err){
+            console.log(err)
+        }
+    }
 
 
     useEffect(() => {
@@ -40,7 +50,7 @@ const Hoy = () => {
                             date: date,
                             trabajadorId: trabajador.id
                         }}
-                        onSubmit={(values)=>(console.log(values))}
+                        onSubmit={(values,{resetForm})=>{updateHorasJornadaFromService(values); resetForm()}}
 
                         enableReinitialize
                     >
