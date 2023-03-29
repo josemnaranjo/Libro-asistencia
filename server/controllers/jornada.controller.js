@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {wb, colEstilo, contenidoEstilo } from '../config/excel4node.config.js';
 import fs from 'fs';
+import { col } from "sequelize";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -67,3 +68,5 @@ export const updateHorasEnJornada = async(req,res)=>{
         res.status(500).json({error:"Algo salió mal al crear la nueva jornada",err})
     }
 };
+
+

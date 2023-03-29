@@ -83,3 +83,31 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
 };
 
 
+export const getInformeMes = async(req,res)=>{
+    try{
+        const {dateStart , dateFinish} = req.body;
+        // let nombreArchivo = "Informe_de_Libro_de_Asistencias" +"_" + fechaMes +"_"+fechaAno;
+
+        // const ws = wb.addWorksheet("Informe de libro de asistencia"+"_"+ fechaMes);
+
+        // ws.cell(1,1).string("Nombre").style(colEstilo);
+        // ws.cell(1,2).string("Apellido").style(colEstilo);
+        // ws.cell(1,3).string("Rut").style(colEstilo);
+        // ws.cell(1,4).string("Hora Entrada").style(colEstilo);
+
+        const mesInfo = await Jornada.findAll({
+            where:{
+                date:{
+                    [Op.between]:[dateStart,dateFinish]
+                }
+            }
+        });
+        
+        res.json({mesInfo});
+
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al obtener la información",err})
+    }
+}
+
