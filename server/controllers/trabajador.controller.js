@@ -86,14 +86,16 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
 export const getInformeMes = async(req,res)=>{
     try{
         const {dateStart , dateFinish} = req.body;
-        // let nombreArchivo = "Informe_de_Libro_de_Asistencias" +"_" + fechaMes +"_"+fechaAno;
+        let nombreArchivo = "Informe_de_Libro_de_Asistencias" +"_" + fechaMes +"_"+fechaAno;
 
-        // const ws = wb.addWorksheet("Informe de libro de asistencia"+"_"+ fechaMes);
+        const ws = wb.addWorksheet("Informe de libro de asistencia"+"_"+ fechaMes);
 
-        // ws.cell(1,1).string("Nombre").style(colEstilo);
-        // ws.cell(1,2).string("Apellido").style(colEstilo);
-        // ws.cell(1,3).string("Rut").style(colEstilo);
-        // ws.cell(1,4).string("Hora Entrada").style(colEstilo);
+        ws.cell(1,1).string("Fecha").style(colEstilo);
+        ws.cell(1,2).string("Hora Inicio").style(colEstilo);
+        ws.cell(1,3).string("Hora Termino").style(colEstilo);
+        ws.cell(1,4).string("Nombre").style(colEstilo);
+        ws.cell(1,5).string("Apellido").style(colEstilo);
+        ws.cell(1.6).string("Rut").style(colEstilo);
 
         const mesInfo = await Jornada.findAll({
             where:{
@@ -103,24 +105,14 @@ export const getInformeMes = async(req,res)=>{
             },
             order:[
                 ['trabajadorId', 'ASC']
-            ]
+            ],
+            include: Trabajador
             
         });
 
-        const trabajadoresFiltrados = mesInfo.map((jornada)=>jornada.trabajadorId);
-
-        const trabajadoresInfo = await Trabajador.findAll({
-            where:{
-                id: {[Op.in]:trabajadoresFiltrados}
-            },
-            order:[
-                ['id', 'ASC']
-            ],
-            include: Jornada
-        });
-
         
-        res.json({trabajadoresInfo});
+        
+        res.json({mesInfo});
 
 
     }catch(err){
