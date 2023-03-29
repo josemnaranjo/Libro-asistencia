@@ -99,11 +99,28 @@ export const getInformeMes = async(req,res)=>{
             where:{
                 date:{
                     [Op.between]:[dateStart,dateFinish]
-                }
-            }
+                },
+            },
+            order:[
+                ['trabajadorId', 'ASC']
+            ]
+            
         });
+
+        const trabajadoresFiltrados = mesInfo.map((trabajador)=>trabajador.trabajadorId);
+
+        const trabajadoresInfo = await Trabajador.findAll({
+            where:{
+                id: {[Op.in]:trabajadoresFiltrados}
+            },
+            order:[
+                ['id', 'ASC']
+            ]
+        })
+
+
         
-        res.json({mesInfo});
+        res.json({mesInfo, trabajadoresInfo});
 
 
     }catch(err){
