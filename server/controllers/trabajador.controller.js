@@ -9,9 +9,7 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let date = new Date();
-let fechaMes = (date.getUTCMonth())+1;
-let fechaAno = date.getFullYear();
+
 
 export const addTrabajador = async(req,res)=>{
     try{
@@ -86,16 +84,16 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
 export const getInformeMes = async(req,res)=>{
     try{
         const {dateStart , dateFinish} = req.body;
-        let nombreArchivo = "Informe_de_Libro_de_Asistencias" +"_" + fechaMes +"_"+fechaAno;
+        let nombreArchivo = "Informe_de_Libro_de_Asistencias";
 
-        const ws = wb.addWorksheet("Informe de libro de asistencia"+"_"+ fechaMes);
+        const ws = wb.addWorksheet("Informe de libro de asistencia");
 
         ws.cell(1,1).string("Fecha").style(colEstilo);
         ws.cell(1,2).string("Hora Inicio").style(colEstilo);
         ws.cell(1,3).string("Hora Termino").style(colEstilo);
         ws.cell(1,4).string("Nombre").style(colEstilo);
         ws.cell(1,5).string("Apellido").style(colEstilo);
-        ws.cell(1.6).string("Rut").style(colEstilo);
+        ws.cell(1,6).string("Rut").style(colEstilo);
 
         const mesInfo = await Jornada.findAll({
             where:{
@@ -110,10 +108,32 @@ export const getInformeMes = async(req,res)=>{
             
         });
 
-        
-        
-        res.json({mesInfo});
+        let cualFila = 2;
+        mesInfo.forEach(datoActual => {
+            ws.cell(cualFila,1).string(datoActual.date).style(contenidoEstilo);
+            ws.cell(cualFila,2).string(datoActual.horaInicio).style(contenidoEstilo);
+            ws.cell(cualFila,3).string(datoActual.horaTermino).style(contenidoEstilo);
+            ws.cell(cualFila,4).string(datoActual.Trabajador.name).style(contenidoEstilo);
+            ws.cell(cualFila,5).string(datoActual.Trabajador.lastName).style(contenidoEstilo);
+            ws.cell(cualFila,6).string(datoActual.Trabajador.rut).style(contenidoEstilo);
+            cualFila++
+        });
 
+        const pathExcel = path.join(__dirname,nombreArchivo + '.xlsx');
+
+        wb.write(pathExcel,function(err,stats){
+            if(err) console.log(err);
+            else{
+                function downloadFile(){res.download(pathExcel)};
+                downloadFile();
+                fs.rm(pathExcel,function(err){
+                    if(err) console.log(err)
+                    else{
+                        console.log("Archivo descargado y borrado correctamente")
+                    }
+                })
+            }
+        })
 
     }catch(err){
         res.status(500).json({error:"Algo salió mal al obtener la información",err})
