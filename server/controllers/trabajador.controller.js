@@ -83,10 +83,10 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
 
 export const getInformeMes = async(req,res)=>{
     try{
-        const {dateStart , dateFinish} = req.body;
-        let nombreArchivo = "Informe_de_Libro_de_Asistencias";
+        const {dateStart , dateFinish, mes} = req.body;
+        let nombreArchivo = "Informe_de_Asistencias"+"_"+mes;
 
-        const ws = wb.addWorksheet("Informe de libro de asistencia");
+        const ws = wb.addWorksheet("Informe de asistencia"+"_"+mes);
 
         ws.cell(1,1).string("Fecha").style(colEstilo);
         ws.cell(1,2).string("Hora Inicio").style(colEstilo);
