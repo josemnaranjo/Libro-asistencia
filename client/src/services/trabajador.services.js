@@ -6,4 +6,32 @@ export const getAllTrabajadores = async() => await axios.get('http://localhost:8
 
 export const getAllTrabajadoresOfAJornada = async(date) => await axios.get(`http://localhost:8000/api/obtener-jornada/${date}`);
 
-export const getInformeMes = async(data) => await axios.post('http://localhost:8000/api/obtener-informe-mes',data);
+
+export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
+    url:'http://localhost:8000/api/obtener-informe-mes',
+    method:'post',
+    data:{
+        dateStart:dateStart,
+        mes: mes,
+        dateFinish:dateFinish
+
+    },
+    responseType:'blob'
+})
+    .then((response)=>{
+        //se crea un archivo de link en la memoria del navegador
+        const href = URL.createObjectURL(response.data);
+        //se crea un "a" html tag 
+        const link = document.createElement('a');
+        //definimos la propiedad href como el link que pasamos en la linea 23
+        link.href= href;
+        //investigar mas
+        link.setAttribute('download', `Informe de asistencias_${mes}.xlsx`);
+        document.body.appendChild(link);
+        //hacemos click en el "a" que creamos
+        link.click();
+
+        //removemos el elemento "a" y el elemento que creamos en la linea 23
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href)
+    });

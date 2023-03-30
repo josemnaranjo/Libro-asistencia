@@ -9,7 +9,7 @@ const PresenteA = () => {
 
     const getInformeMesFromService = async(data) => {
         try{
-            console.log(data);
+            getInformeMes(data);
         }catch(err){
             console.log(err)
         }

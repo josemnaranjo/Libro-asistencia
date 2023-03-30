@@ -83,8 +83,8 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
 
 export const getInformeMes = async(req,res)=>{
     try{
-        const {dateStart , dateFinish, mes} = req.body;
-        let nombreArchivo = "Informe_de_Asistencias"+"_"+mes;
+        const {dateStart, mes, dateFinish } = req.body;
+        let nombreArchivo = "Informe_de_Asistencias";
 
         const ws = wb.addWorksheet("Informe de asistencia"+"_"+mes);
 
@@ -108,6 +108,8 @@ export const getInformeMes = async(req,res)=>{
             
         });
 
+        
+
         let cualFila = 2;
         mesInfo.forEach(datoActual => {
             ws.cell(cualFila,1).string(datoActual.date).style(contenidoEstilo);
@@ -121,19 +123,7 @@ export const getInformeMes = async(req,res)=>{
 
         const pathExcel = path.join(__dirname,nombreArchivo + '.xlsx');
 
-        wb.write(pathExcel,function(err,stats){
-            if(err) console.log(err);
-            else{
-                function downloadFile(){res.download(pathExcel)};
-                downloadFile();
-                fs.rm(pathExcel,function(err){
-                    if(err) console.log(err)
-                    else{
-                        console.log("Archivo descargado y borrado correctamente")
-                    }
-                })
-            }
-        })
+        wb.write(nombreArchivo+'.xlsx',res);
 
     }catch(err){
         res.status(500).json({error:"Algo salió mal al obtener la información",err})

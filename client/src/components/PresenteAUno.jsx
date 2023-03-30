@@ -11,7 +11,7 @@ const PresenteAUno = (props) => {
                 <div className='grid grid-cols-3 justify-items-center'>
                     <h1>Enero</h1>
                     <button className='bg-secondary-dark rounded-lg text-white w-32 h-10' >ver detalles</button>
-                    <button className='bg-secondary-dark rounded-lg text-white w-38 h-10 px-3' onClick={()=>onSubmitProps({dateStart:`${fechaAno}-01-01`, mes:"enero", dateFinish:`${fechaAno}-01-31`})}> informe de asistencias</button>
+                    <button className='bg-secondary-dark rounded-lg text-white w-38 h-10 px-3' onClick={()=>onSubmitProps({dateStart:`${fechaAno}-01-01`, mes:"enero", dateFinish:`${fechaAno}-01-31`})} value="download"> informe de asistencias</button>
                 </div>
 
                 <div className='grid grid-cols-3 justify-items-center'>
