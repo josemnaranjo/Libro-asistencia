@@ -1,38 +1,31 @@
-import React from 'react';
+import {React, useState} from 'react';
+import PresenteAUno from '../components/PresenteAUno';
+import PresenteADos from '../components/PresenteADos';
+import PresenteATres from '../components/PresenteATres';
 
 const PresenteA = () => {
+    const [page,setPage] = useState(1)
 
     return (
 
         <div>
-            <div className='grid grid-rows-4 gap-y-14 mt-20'>
+            {
+                page === 1 ? <PresenteAUno/> : null
+            }
 
-                <div className='grid grid-cols-3 justify-items-center'>
-                    <h1>Enero</h1>
-                    <button className='bg-secondary-dark rounded-lg text-white w-32 h-10'>ver detalles</button>
-                    <button className='bg-secondary-dark rounded-lg text-white w-38 h-10 px-3'> informe de asistencias</button>
-                </div>
+            {
+                page === 2 ? <PresenteADos/> : null
+            }
+            
+            {
+                page === 3 ? <PresenteATres/> : null
+            }
 
-                <div className='grid grid-cols-3 justify-items-center'>
-                    <h1>Febrero</h1>
-                    <button className='bg-secondary-dark rounded-lg text-white w-32 h-10'>ver detalles</button>
-                    <button className='bg-secondary-dark rounded-lg text-white w-38 h-10 px-3'> informe de asistencias</button>
-                </div>
-
-                <div className='grid grid-cols-3 justify-items-center '>
-                    <h1>Marzo</h1>
-                    <button className='bg-secondary-dark rounded-lg text-white w-32 h-10'>ver detalles</button>
-                    <button className='bg-secondary-dark rounded-lg text-white w-38 h-10 px-3'> informe de asistencias</button>
-                </div>
-
-                <div className='grid grid-cols-3 justify-items-center'>
-                    <h1>Abril</h1>
-                    <button className='bg-secondary-dark rounded-lg text-white w-32 h-10'>ver detalles</button>
-                    <button className='bg-secondary-dark rounded-lg text-white w-38 h-10 px-3'> informe de asistencias</button>
-                </div>
-
-            </div>
-
+            <ul className='flex gap-3'>
+                <li><button>1</button></li>
+                <li><button>2</button></li>
+                <li><button>3</button></li>
+            </ul>
         </div>
     );
 }
