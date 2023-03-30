@@ -4,7 +4,8 @@ import PresenteADos from '../components/PresenteADos';
 import PresenteATres from '../components/PresenteATres';
 
 const PresenteA = () => {
-    const [page,setPage] = useState(1)
+    const [page,setPage] = useState(1);
+
 
     return (
 
@@ -21,10 +22,18 @@ const PresenteA = () => {
                 page === 3 ? <PresenteATres/> : null
             }
 
-            <ul className='flex gap-3'>
-                <li><button>1</button></li>
-                <li><button>2</button></li>
-                <li><button>3</button></li>
+            <ul className='flex justify-center gap-3 mt-20'>
+                <li>
+                    <button onClick={()=>setPage(1)} >1</button>
+                </li>
+
+                <li>
+                    <button onClick={()=>setPage(2)}>2</button>
+                </li>
+
+                <li>
+                    <button onClick={()=>setPage(3)}>3</button>
+                </li>
             </ul>
         </div>
     );
