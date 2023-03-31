@@ -6,6 +6,7 @@ import {createNewJornada} from '../services/jornada.services.js';
 
 
 
+
 const NuevoDia = () => {
     const [trabajadores, setTrabajadores] = useState([]);
     
@@ -16,6 +17,9 @@ const NuevoDia = () => {
             const jornada =  idTrbajadores.map(((id)=>({date:date,trabajadorId:id})));
             const objPrincipal = {jornada};
             await createNewJornada(objPrincipal);
+
+        
+
         }catch(err){
             console.log(err)
         }

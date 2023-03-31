@@ -2,7 +2,8 @@ import {React, useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
 import {updateHorasJornada} from '../services/jornada.services.js';
-import {Formik,Field, Form} from 'formik'
+import {Formik,Field, Form} from 'formik';
+import {Report} from 'notiflix/build/notiflix-report-aio';
 
 const Hoy = () => {
 
@@ -26,6 +27,11 @@ const Hoy = () => {
         try{
             const response = await updateHorasJornada(values);
             setDato(response.data);
+            Report.success(
+                "Datos actualizados exitosamente",
+                "",
+                "Aceptar"
+            )
             
         }catch(err){
             console.log(err)
