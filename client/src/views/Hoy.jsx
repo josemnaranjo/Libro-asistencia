@@ -4,6 +4,7 @@ import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
 import {updateHorasJornada} from '../services/jornada.services.js';
 import {Formik,Field, Form} from 'formik';
 import {Report} from 'notiflix/build/notiflix-report-aio';
+import dayjs from 'dayjs';
 
 const Hoy = () => {
 
@@ -12,6 +13,8 @@ const Hoy = () => {
     const [jornadaInfo, setJornadaInfo] = useState([]);
     const [dato,setDato] = useState();
     const {date} = useParams();
+    const fecha = dayjs(date).format('DD/MM/YYYY');
+    
    
 
     const getAllTrabajadoresFromService = async()=>{
@@ -47,7 +50,7 @@ const Hoy = () => {
     
     return (
         <div>
-            <h1 className='text-center text-lg pt-3'>{date}</h1>
+            <h1 className='text-center text-lg mt-9 '>{fecha}</h1>
             {
             trabajadoresInfo?.map((trabajador,n)=>(
                 
