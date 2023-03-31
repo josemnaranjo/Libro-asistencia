@@ -68,7 +68,7 @@ const Hoy = () => {
                                     <div className='grid grid-cols-5 justify-items-center' key={trabajador.id}>
 
                                         <div>
-                                            <label>Nombre: {trabajador.name} {trabajador.lastName}</label>
+                                            <label> {trabajador.name} {trabajador.lastName}</label>
                                         </div>
                                         <div className=''>
                                             <label>Rut: {trabajador.rut}</label>
