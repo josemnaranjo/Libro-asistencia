@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 const NuevoDia = () => {
     const [trabajadores, setTrabajadores] = useState([]);
     const navigate = useNavigate();
@@ -42,13 +43,14 @@ const NuevoDia = () => {
                         date:'',
                         trabajadorId:''
                     }}
-                    onSubmit={(values,{resetForm})=>{newJornadaFromService(values);
+                    onSubmit={(values,{resetForm})=>{
+                        newJornadaFromService(values);
                         resetForm();}}
                 >
                     <Form >
                         <div className='text-center'>
                             <label htmlFor='date'>Fecha:</label>
-                            <Field placeholder="YYYY-MM-dd" id='date' type='text' name='date' className='text-xs bg-slate-200 mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
+                            <Field placeholder="YYYY-MM-DD" id='date' type='text' name='date' className='text-xs bg-slate-200 mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
                         </div>
                         <ul className='mt-10'>
                             {trabajadores?.map((trabajador,i)=>(
