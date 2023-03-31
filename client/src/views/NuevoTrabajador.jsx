@@ -9,9 +9,13 @@ const NuevoTrabajador = () => {
         try{
             await addTrabajador(values);
             Report.success(
-                "Nuevo trabajador creado exitosamente",
+                "Nuevo trabajador creado",
                 "",
-                "Aceptar"
+                "Aceptar",
+                {
+                    backgroundColor:"#FFBF18",
+                    titleColor:"#FFFFFF"
+                },   
             )
         }catch(err){
             console.log(err)
