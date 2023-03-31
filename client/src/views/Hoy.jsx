@@ -12,12 +12,14 @@ const Hoy = () => {
     const [jornadaInfo, setJornadaInfo] = useState([]);
     const [dato,setDato] = useState();
     const {date} = useParams();
+   
 
     const getAllTrabajadoresFromService = async()=>{
         try{
             const response = await getAllTrabajadoresOfAJornada(date);
             setTrabajadoresInfo(response.data.trabajadoresInfo);
             setJornadaInfo(response.data.jornadaInfo);
+            
         }catch(err){
             console.log(err)
         }
