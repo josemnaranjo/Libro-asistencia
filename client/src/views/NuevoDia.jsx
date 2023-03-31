@@ -2,13 +2,14 @@ import {React, useState,useEffect}  from 'react';
 import { getAllTrabajadores } from '../services/trabajador.services';
 import {Formik, Form, Field} from 'formik';
 import {createNewJornada} from '../services/jornada.services.js';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const NuevoDia = () => {
     const [trabajadores, setTrabajadores] = useState([]);
+    const navigate = useNavigate();
     
     const newJornadaFromService = async(values)=>{
         try{
@@ -17,7 +18,7 @@ const NuevoDia = () => {
             const jornada =  idTrbajadores.map(((id)=>({date:date,trabajadorId:id})));
             const objPrincipal = {jornada};
             await createNewJornada(objPrincipal);
-
+            navigate(`/libro-de-asistencias/${date}`);
         
 
         }catch(err){
