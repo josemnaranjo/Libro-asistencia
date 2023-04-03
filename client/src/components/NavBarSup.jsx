@@ -13,13 +13,13 @@ const NavBarSup = () => {
             <nav className='bg-secondary-light h-1/6 grid grid-cols-3'>
                 <div className='border-r-2 border-blue-600 hover:bg-secondary-dark active:bg-secondary-middle'>
                     <Link to={`/libro-de-asistencias/${hoy}`}>
-                        <p className='text-white text-center pt-5'>Hoy</p>
+                        <p className='text-white text-center'>Hoy</p>
                     </Link>
                 </div>
 
                 <div className='border-r-2 border-blue-600 hover:bg-secondary-dark active:bg-secondary-middle'>
                     <Link to={`/libro-de-asistencias/year/${year}`}>
-                        <p className='text-white text-center pt-5'>{year}</p>
+                        <p className='text-white text-center'>{year}</p>
                     </Link>
                 </div>
             </nav>
