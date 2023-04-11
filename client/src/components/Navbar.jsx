@@ -20,7 +20,7 @@ const Navbar = () => {
 
                 <div className='flex flex-col items-center absolute inset-x-0 bottom-0 mb-36'>
                     <Link
-                        to="/nuevo-trabajador"
+                        to="/trabajadores"
                     >
                         <button className='bg-secondary-dark p-3.5 rounded-lg text-white'>trabajadores</button>
                     </Link>
