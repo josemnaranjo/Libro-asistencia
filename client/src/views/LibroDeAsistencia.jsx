@@ -1,10 +1,10 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+
 
 const LibroDeAsistencia = () => {
     return (
         <div>
-            <Outlet />
+            <h1>Registro de asistencia</h1>
         </div>
     );
 }

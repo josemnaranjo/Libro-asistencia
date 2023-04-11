@@ -5,9 +5,6 @@ import Home from './views/Home';
 import NuevoTrabajador from './views/NuevoTrabajador';
 import NuevoDia from './views/NuevoDia';
 import LibroDeAsistencia from './views/LibroDeAsistencia.jsx';
-import PresenteMes from './views/PresenteMes';
-import Hoy from './views/Hoy';
-import PresenteA from './views/PresenteA';
 import TrabajadoresCentral from './views/TrabajadoresCentral';
 import Licencias from './views/Licencias';
 
@@ -23,11 +20,7 @@ function App() {
                 <Route path='nuevo-trabajador' element={<NuevoTrabajador/>}/> 
                 <Route path='licencia' element={<Licencias/>}/>
                 <Route path='nuevo-dia' element={<NuevoDia/>}/>
-                <Route path='libro-de-asistencias' element={<LibroDeAsistencia/>}>
-                    <Route path=':date' element={<Hoy/>}/>
-                    <Route path='year/:year' element={<PresenteA/>}/>
-                    <Route path='presente-mes/:id' element={<PresenteMes/>}/>
-                </Route>
+                <Route path='libro-de-asistencias' element={<LibroDeAsistencia/>}/>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>
