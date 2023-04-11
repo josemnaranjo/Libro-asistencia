@@ -4,9 +4,7 @@ const NuevoDia = () => {
     
     return (
         <div>
-            <div className='mt-9'>
-                <p>Nuevo día</p>
-            </div>
+            <h1>Nuevo día</h1>
         </div>
     );
 }
