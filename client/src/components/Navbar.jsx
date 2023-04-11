@@ -22,7 +22,7 @@ const Navbar = () => {
                     <Link
                         to="/nuevo-trabajador"
                     >
-                        <button className='bg-secondary-dark p-3.5 rounded-lg text-white'>nuevo trabajador</button>
+                        <button className='bg-secondary-dark p-3.5 rounded-lg text-white'>trabajadores</button>
                     </Link>
 
                     <Link
