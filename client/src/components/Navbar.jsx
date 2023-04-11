@@ -1,14 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {
-    Dropdown,
-    initTE,
-  } from "tw-elements";
-  
-  initTE( Dropdown );
+
 
 
 const Navbar = () => {
+    
 
     return (
         <nav className='bg-primary-dark h-screen pt-8 p-4 w-64 relative'>
