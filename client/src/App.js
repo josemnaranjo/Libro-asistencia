@@ -10,6 +10,7 @@ import Licencias from './views/Licencias';
 import RegistroEntrada from './views/RegistroEntrada';
 import RegistroSalida from './views/RegistroSalida';
 import RegistroAusentes from './views/RegistroAusentes';
+import RegistroYear from './views/RegistroYear';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path='registro-entrada' element={<RegistroEntrada/>}/>
                 <Route path='registro-salida' element={<RegistroSalida/>}/>
                 <Route path='registro-ausentes' element={<RegistroAusentes/>}/>
+                <Route path='registro-year' element={<RegistroYear/>}/>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>
