@@ -4,9 +4,12 @@ import NavegacionLibroAsistencias from './components/NavegacionLibroAsistencias'
 import Home from './views/Home';
 import NuevoTrabajador from './views/NuevoTrabajador';
 import NuevoDia from './views/NuevoDia';
-import LibroDeAsistencia from './views/LibroDeAsistencia.jsx';
+import LibroDeAsistencia from './views/LibroDeAsistencia';
 import TrabajadoresCentral from './views/TrabajadoresCentral';
 import Licencias from './views/Licencias';
+import RegistroEntrada from './views/RegistroEntrada';
+import RegistroSalida from './views/RegistroSalida';
+import RegistroAusentes from './views/RegistroAusentes';
 
 
 function App() {
@@ -21,6 +24,9 @@ function App() {
                 <Route path='licencia' element={<Licencias/>}/>
                 <Route path='nuevo-dia' element={<NuevoDia/>}/>
                 <Route path='libro-de-asistencias' element={<LibroDeAsistencia/>}/>
+                <Route path='registro-entrada' element={<RegistroEntrada/>}/>
+                <Route path='registro-salida' element={<RegistroSalida/>}/>
+                <Route path='registro-ausentes' element={<RegistroAusentes/>}/>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>
