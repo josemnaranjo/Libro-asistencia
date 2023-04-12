@@ -44,7 +44,7 @@ const TrabajadoresCentral = () => {
                         {trabajadores?.map((t)=>(
                         <li key={t.id} className='grid grid-cols-5 gap-x-36 py-1'> 
                             <p>{t.name} {t.lastName}</p>
-                            <p> {t.rut}</p>
+                            <p className='text-center'> {t.rut}</p>
                             <button className='bg-secondary-light p-1 rounded-lg text-white'>editar</button>
                             <button className='bg-primary-dark p-1 rounded-lg text-white'>borrar</button>
                             <button className='bg-secondary-dark p-1 rounded-lg text-white'>licencia</button>
