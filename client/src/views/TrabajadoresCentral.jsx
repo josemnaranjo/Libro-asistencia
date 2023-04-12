@@ -1,8 +1,10 @@
 import {React, useState, useEffect} from 'react';
 import { getAllTrabajadores } from '../services/trabajador.services.js';
+import { useNavigate } from 'react-router-dom';
 
 const TrabajadoresCentral = () => {
     const [trabajadores,setTrabajadores] = useState();
+    const navigate = useNavigate();
 
     const getAllTrabajadoresFromService = async() => {
         try{
@@ -32,7 +34,7 @@ const TrabajadoresCentral = () => {
                     </div>
 
                     {/* buton crear nuevo trabajador */}
-                    <button className='bg-secondary-dark p-1.5 rounded-lg text-white ml-2'>nuevo trabajador</button>
+                    <button className='bg-secondary-dark p-1.5 rounded-lg text-white ml-2' onClick={()=>navigate('/nuevo-trabajador')}>nuevo trabajador</button>
 
                 </div>
 
