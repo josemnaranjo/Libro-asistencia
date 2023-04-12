@@ -36,6 +36,12 @@ export const Trabajador = sequelize.define('Trabajador', {
         validate:{
             notEmpty:true,
         }
+    },
+    inicioLicencia:{
+        type:DataTypes.DATEONLY,
+    },
+    finLicencia:{
+        type:DataTypes.DATEONLY,
     }
 },{
     timestamps:false
