@@ -24,11 +24,11 @@ function App() {
                 <Route path='nuevo-trabajador' element={<NuevoTrabajador/>}/> 
                 <Route path='licencia' element={<Licencias/>}/>
                 <Route path='nuevo-dia' element={<NuevoDia/>}/>
-                <Route path='libro-de-asistencias' element={<LibroDeAsistencia/>}/>
+                <Route path='libro-de-asistencias/:date' element={<LibroDeAsistencia/>}/>
                 <Route path='registro-entrada' element={<RegistroEntrada/>}/>
                 <Route path='registro-salida' element={<RegistroSalida/>}/>
                 <Route path='registro-ausentes' element={<RegistroAusentes/>}/>
-                <Route path='registro-year' element={<RegistroYear/>}/>
+                <Route path='registro-year/:year' element={<RegistroYear/>}/>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>
