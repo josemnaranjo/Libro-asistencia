@@ -46,9 +46,25 @@ export const deleteOneTrabajador = async (req,res)=>{
         res.json({menssage: "Trabajador eliminado de la base de datos"});
 
     }catch(err){
-        res.status(500).json({error:"Algo salió mal al intentar eliminar al trbajador de la base de datos",err})
+        res.status(500).json({error:"Algo salió mal al intentar eliminar al trabajador de la base de datos",err})
     }
 };
+
+export const updateTrabajador = async (req,res)=>{
+    try{
+        const {name,lastName,rut} =req.body;
+        const {rutTrabajador} = req.params;
+        await Trabajador.update({name,lastName,rut},{
+            where:{
+                rut:rutTrabajador
+            }
+        });
+        res.json({message:"Datos del Trabajador actualizados"})
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al intentar actualizar los datos del trabajador",err})
+    }
+}
 
 export const getAllTrabajadoresOfAJornada = async(req,res)=>{
     try{
