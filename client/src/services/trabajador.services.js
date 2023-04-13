@@ -6,6 +6,8 @@ export const getAllTrabajadores = async() => await axios.get('http://localhost:8
 
 export const getAllTrabajadoresOfAJornada = async(date) => await axios.get(`http://localhost:8000/api/obtener-jornada/${date}`);
 
+export const deleteOneTrabajador = async(rut) => await axios.delete('http://localhost:8000/api/delete-trabajador',rut);
+
 
 export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
     url:'http://localhost:8000/api/obtener-informe-mes',
