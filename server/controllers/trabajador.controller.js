@@ -51,7 +51,7 @@ export const getOneTrabajador = async (req,res)=> {
 
 export const deleteOneTrabajador = async (req,res)=>{
     try{
-        const {rut} = req.body;
+        const {rut} = req.params;
         await Trabajador.destroy({
             where:{
                 rut: rut

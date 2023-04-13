@@ -6,7 +6,7 @@ export const getAllTrabajadores = async() => await axios.get('http://localhost:8
 
 export const getAllTrabajadoresOfAJornada = async(date) => await axios.get(`http://localhost:8000/api/obtener-jornada/${date}`);
 
-export const deleteOneTrabajador = async(rut) => await axios.delete('http://localhost:8000/api/delete-trabajador',rut);
+export const deleteOneTrabajador = async(rut) => await axios.delete(`http://localhost:8000/api/delete-trabajador/${rut}`);
 
 export const updateTrabajador = async(values,rut) => await axios.put(`http://localhost:8000/api/obtener-trabajador/${rut}`,values);
 

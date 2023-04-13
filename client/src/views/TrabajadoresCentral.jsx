@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import { getAllTrabajadores } from '../services/trabajador.services.js';
+import { getAllTrabajadores, deleteOneTrabajador  } from '../services/trabajador.services.js';
 import { useNavigate } from 'react-router-dom';
 
 const TrabajadoresCentral = () => {
@@ -15,6 +15,17 @@ const TrabajadoresCentral = () => {
             console.log(err)
         }
     };
+
+    const deleteTrabajador = async(rut)=>{
+        try{
+            const newArray = trabajadores.filter(trabajador => trabajador.rut !== rut);
+            await deleteOneTrabajador(rut);
+            setTrabajadores(newArray);
+
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     useEffect(() => {
         getAllTrabajadoresFromService();
@@ -46,12 +57,11 @@ const TrabajadoresCentral = () => {
                             <p>{t.name} {t.lastName}</p>
                             <p className='text-center'> {t.rut}</p>
                             <button className='bg-secondary-light p-1 rounded-lg text-white'>editar</button>
-                            <button className='bg-primary-dark p-1 rounded-lg text-white'>borrar</button>
+                            <button className='bg-primary-dark p-1 rounded-lg text-white' onClick={()=>deleteTrabajador(t.rut)}>borrar</button>
                             <button className='bg-secondary-dark p-1 rounded-lg text-white'>licencia</button>
                         </li>
                         ))}
                     </ul>
-
                 </div>
 
             </div>
