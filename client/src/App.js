@@ -11,6 +11,7 @@ import RegistroEntrada from './views/RegistroEntrada';
 import RegistroSalida from './views/RegistroSalida';
 import RegistroAusentes from './views/RegistroAusentes';
 import RegistroYear from './views/RegistroYear';
+import EditarTrabajador from './views/EditarTrabajador';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 <Route path='registro-salida' element={<RegistroSalida/>}/>
                 <Route path='registro-ausentes' element={<RegistroAusentes/>}/>
                 <Route path='registro-year/:year' element={<RegistroYear/>}/>
+                <Route path='editar-trabajador/:rut' element={<EditarTrabajador/>}/>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>
