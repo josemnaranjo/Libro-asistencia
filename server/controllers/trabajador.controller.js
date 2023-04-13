@@ -35,6 +35,20 @@ export const getAllTrabajadores = async (req,res)=> {
     }
 };
 
+export const getOneTrabajador = async (req,res)=> {
+    try{
+        const {rut} = req.params;
+        const trabajador = await Trabajador.findAll({
+            where:{
+                rut:rut
+            }
+        });
+        res.json(trabajador);
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al solicitar al trabajador de la base de datos",err})
+    }
+};
+
 export const deleteOneTrabajador = async (req,res)=>{
     try{
         const {rut} = req.body;

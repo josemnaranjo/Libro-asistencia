@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {addTrabajador, getAllTrabajadores, deleteOneTrabajador, getAllTrabajadoresOfAJornada, getInformeMes, updateTrabajador } from '../controllers/trabajador.controller.js';
+import {addTrabajador, getAllTrabajadores, deleteOneTrabajador, getAllTrabajadoresOfAJornada, getInformeMes, updateTrabajador, getOneTrabajador } from '../controllers/trabajador.controller.js';
 
 const router = Router();
 
@@ -9,5 +9,6 @@ router.delete('/api/delete-trabajador',deleteOneTrabajador);
 router.get('/api/obtener-jornada/:date',getAllTrabajadoresOfAJornada);
 router.post('/api/obtener-informe-mes',getInformeMes);
 router.put('/api/actualizar-datos-trabajador/:rutTrabajador', updateTrabajador);
+router.get('/api/obtener-trabajador/:rut',getOneTrabajador);
 
 export default router;
