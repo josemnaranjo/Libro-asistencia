@@ -8,6 +8,8 @@ export const getAllTrabajadoresOfAJornada = async(date) => await axios.get(`http
 
 export const deleteOneTrabajador = async(rut) => await axios.delete('http://localhost:8000/api/delete-trabajador',rut);
 
+export const updateTrabajador = async(values,rut) => await axios.put(`http://localhost:8000/api/obtener-trabajador/${rut}`,values);
+
 
 export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
     url:'http://localhost:8000/api/obtener-informe-mes',
