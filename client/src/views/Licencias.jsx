@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import {getOneTrabajador} from '../services/trabajador.services.js';
+import {getOneTrabajador, createLicencia} from '../services/trabajador.services.js';
 import {Formik,Form, Field} from 'formik';
 
 const Licencias = () => {
@@ -16,6 +16,15 @@ const Licencias = () => {
         }
     };
 
+    const createLicenciaFromService =async(values)=>{
+        try{
+            await createLicencia(rut,values);
+            console.log("exito")
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         getAllTrabajadoresFromService();
     }, []);
@@ -30,7 +39,14 @@ const Licencias = () => {
                         <h1 className='text-center'>{trabajador?.name} {trabajador?.lastName}</h1>
                         <h1 className='text-center'>{trabajador?.rut}</h1>
                     </div>
-                    <Formik>
+                    <Formik
+                        initialValues={{
+                                inicioLicencia:'',
+                                finLicencia:'',
+                            }}
+                        onSubmit={(values)=>createLicenciaFromService(values)}
+                        enableReinitialize
+                    >
                         <Form>
                             <div className='grid grid-cols-2'>
                                 <div className='text-center'>
