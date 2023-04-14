@@ -41,6 +41,4 @@ export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
         URL.revokeObjectURL(href)
     });
 
-export const inicioLicencia = async(rut, values) => await axios.put(`http://localhost:8000/api/actualizar-inicio-licencia/${rut}`,values);
-
-export const terminoLicencia = async(rut, values) => await axios.put(`http://localhost:8000/api/actualizar-termino-licencia/${rut}`,values);
+export const creatLicencia = async(rut, values) => await axios.put(`http://localhost:8000/api/actualizar-licencia/${rut}`,values);
