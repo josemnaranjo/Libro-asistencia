@@ -12,7 +12,6 @@ export const updateTrabajador = async(values,rut) => await axios.put(`http://loc
 
 export const getOneTrabajador = async(rut) => await axios.get(`http://localhost:8000/api/obtener-trabajador/${rut}`); 
 
-
 export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
     url:'http://localhost:8000/api/obtener-informe-mes',
     method:'post',
@@ -41,3 +40,7 @@ export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
         document.body.removeChild(link);
         URL.revokeObjectURL(href)
     });
+
+export const inicioLicencia = async(rut, values) => await axios.put(`http://localhost:8000/api/actualizar-inicio-licencia/${rut}`,values);
+
+export const terminoLicencia = async(rut, values) => await axios.put(`http://localhost:8000/api/actualizar-termino-licencia/${rut}`,values);
