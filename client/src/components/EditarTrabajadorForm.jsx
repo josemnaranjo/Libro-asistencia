@@ -35,7 +35,7 @@ const EditarTrabajadorForm = (props) => {
                                 </div>
 
                                 <div className='text-center'>
-                                        <button className='bg-secondary-dark p-2.5 rounded-lg text-white text-xs mt-5' type='submit'>editar</button>
+                                    <button className='bg-secondary-dark p-2.5 rounded-lg text-white text-xs mt-5' type='submit'>editar</button>
                                 </div>
                             </div>
                         </div>
