@@ -158,5 +158,41 @@ export const getInformeMes = async(req,res)=>{
     }catch(err){
         res.status(500).json({error:"Algo salió mal al obtener la información",err})
     }
+};
+
+export const updateInicioLicencia = async(req,res)=>{
+    try{
+        const {inicioLicencia} = req.body;
+        const {rut} = req.params;
+
+        await Trabajador.update({inicioLicencia},{
+            where:{
+                rut:rut
+            }
+        });
+
+        res.json({message:"Inicio de licencia médica actualizada"});
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al actualizar el inicio de la licencia",err})
+    }
+};
+
+export const updateTerminoLicencia = async(req,res)=>{
+    try{
+        const {finLicencia} = req.body;
+        const {rut} = req.params;
+
+        await Trabajador.update({finLicencia},{
+            where:{
+                rut:rut
+            }
+        });
+
+        res.json({message:"Término de licencia médica actualizada"});
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al actualizar el término de la licencia",err})
+    }
 }
 
