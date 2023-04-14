@@ -58,7 +58,7 @@ const TrabajadoresCentral = () => {
                             <p className='text-center'> {t.rut}</p>
                             <button className='bg-secondary-light p-1 rounded-lg text-white' onClick={()=>navigate(`/editar-trabajador/${t.rut}`)}>editar</button>
                             <button className='bg-primary-dark p-1 rounded-lg text-white' onClick={()=>deleteTrabajador(t.rut)}>borrar</button>
-                            <button className='bg-secondary-dark p-1 rounded-lg text-white'>licencia</button>
+                            <button className='bg-secondary-dark p-1 rounded-lg text-white' onClick={()=>navigate(`/licencia/${t.rut}`)} >licencia</button>
                         </li>
                         ))}
                     </ul>
