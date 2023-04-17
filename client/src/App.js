@@ -26,8 +26,8 @@ function App() {
                 <Route path='licencia/:rut' element={<Licencias/>}/>
                 <Route path='nuevo-dia' element={<NuevoDia/>}/>
                 <Route path='libro-de-asistencias/:date' element={<LibroDeAsistencia/>}/>
-                <Route path='registro-entrada' element={<RegistroEntrada/>}/>
-                <Route path='registro-salida' element={<RegistroSalida/>}/>
+                <Route path='registro-entrada/:date' element={<RegistroEntrada/>}/>
+                <Route path='registro-salida/:date' element={<RegistroSalida/>}/>
                 <Route path='registro-ausentes' element={<RegistroAusentes/>}/>
                 <Route path='registro-year/:year' element={<RegistroYear/>}/>
                 <Route path='editar-trabajador/:rut' element={<EditarTrabajador/>}/>
