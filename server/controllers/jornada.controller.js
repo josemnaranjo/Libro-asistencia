@@ -1,4 +1,5 @@
 import { Jornada } from "../models/Jornadas.js";
+import { Trabajador } from "../models/Trabajador.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {wb, colEstilo, contenidoEstilo } from '../config/excel4node.config.js';
@@ -13,10 +14,23 @@ let date = new Date();
 let fechaMes = (date.getUTCMonth())+1;
 let fechaAno = date.getFullYear();
 
-export const addJornada = async(req,res)=> {
+export const registroDeEntrada = async(req,res)=> {
     try{
-        const newJornada = await Jornada.bulkCreate(req.body.jornada);
-        res.json(newJornada);
+        const {date} = req.params;
+        const {horaInicio,rut}=req.body;
+
+        const trabajador = await Trabajador.findAll({
+            where:{
+                rut:rut
+            }
+        });
+
+        const trabajadorId = trabajador[0].id;
+
+        const nuevaJornada = await Jornada.create({date,horaInicio,trabajadorId});
+
+        res.json({message:"Registro de ingreso creado exitosamente", nuevaJornada })
+
     }catch(err){
         res.status(500).json({error:"Algo salió mal al crear la nueva jornada",err})
     }
