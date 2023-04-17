@@ -5,7 +5,7 @@ const router = Router();
 
 
 router.post('/api/registro-de-entrada/:date',registroDeEntrada );
-router.post('/api/registro-de-salida/:date',registroDeSalida);
+router.put('/api/registro-de-salida/:date',registroDeSalida);
 
 
 export default router
