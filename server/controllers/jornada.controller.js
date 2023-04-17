@@ -38,51 +38,25 @@ export const registroDeEntrada = async(req,res)=> {
     }
 };
 
-export const updateHorasEnJornada = async(req,res)=>{
+export const registroDeSalida = async(req,res)=> {
     try{
-        const {horaInicio, horaTermino, date, trabajadorId} =req.body;
+        const {date} = req.params;
+        const {rut}=req.body;
+        const horaTermino = dayjs().hour()+":"+dayjs().minute()+":"+dayjs().second();
 
+        const trabajador = await Trabajador.findAll({
+            where:{
+                rut:rut
+            }
+        });
 
+        const trabajadorId = trabajador[0].id;
 
-        if(horaInicio ===''&& horaTermino===''){
-            res.json("Debes ingresar un valor en alguno de las horas");
-        }
+        await Jornada.update({horaTermino},{where:{date:date,trabajadorId:trabajadorId}});
 
-        else if(horaInicio === ''){
-            await Jornada.update({horaTermino:horaTermino},{
-                where:{
-                    trabajadorId:trabajadorId,
-                    date:date
-                }
-            });
+        res.json({message:"Registro de salida creado exitosamente" })
 
-            res.json({"Jornada actualizada con éxito. TrabajadorID:": trabajadorId});
-
-        }
-        else if(horaTermino === ''){
-            await Jornada.update({horaInicio:horaInicio},{
-                where:{
-                    trabajadorId:trabajadorId,
-                    date:date
-                }
-            });
-
-            res.json({"Jornada actualizada con éxito. TrabajadorID:": trabajadorId});
-        }
-        else{
-            await Jornada.update({horaInicio:horaInicio,horaTermino:horaTermino},{
-                where:{
-                    trabajadorId:trabajadorId,
-                    date:date
-                }
-            });
-            res.json({"Jornada actualizada con éxito. TrabajadorID:": trabajadorId});
-        }
-        
-
-    }catch{
+    }catch(err){
         res.status(500).json({error:"Algo salió mal al crear la nueva jornada",err})
     }
 };
-
-
