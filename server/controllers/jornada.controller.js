@@ -5,19 +5,21 @@ import { fileURLToPath } from 'url';
 import {wb, colEstilo, contenidoEstilo } from '../config/excel4node.config.js';
 import fs from 'fs';
 import { col } from "sequelize";
+import dayjs from "dayjs";
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-let date = new Date();
-let fechaMes = (date.getUTCMonth())+1;
-let fechaAno = date.getFullYear();
+// let date = new Date();
+// let fechaMes = (date.getUTCMonth())+1;
+// let fechaAno = date.getFullYear();
 
 export const registroDeEntrada = async(req,res)=> {
     try{
         const {date} = req.params;
-        const {horaInicio,rut}=req.body;
+        const {rut}=req.body;
+        const horaInicio = dayjs().hour()+":"+dayjs().minute()+":"+dayjs().second();
 
         const trabajador = await Trabajador.findAll({
             where:{
