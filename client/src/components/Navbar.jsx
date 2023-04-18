@@ -7,7 +7,8 @@ import dayjs from 'dayjs';
 
 const Navbar = () => {
     let fechaAno = dayjs().year();
-    let dia = dayjs().format('DD-MM-YYYY')
+    let dia = dayjs().format('DD-MM-YYYY');
+    let diaRuta = dayjs().format('YYYY-MM-DD');
 
     return (
         <nav className='bg-primary-dark h-screen pt-8 p-4 w-64 relative'>
@@ -51,7 +52,7 @@ const Navbar = () => {
                             <Menu.Items className='absolute -right-28 mt-14'>
                                 <div className='px-1 py-1'>
                                     <Menu.Item>
-                                        <Link to={`/libro-de-asistencias/${dia}`}>
+                                        <Link to={`/libro-de-asistencias/${diaRuta}`}>
                                             <button className='bg-secondary-dark p-1.5 rounded-lg text-white'>{dia}</button>
                                         </Link>
                                     </Menu.Item>
