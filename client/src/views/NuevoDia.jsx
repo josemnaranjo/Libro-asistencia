@@ -1,4 +1,4 @@
-import {React, useState,useEffect}  from 'react';
+import {React, useState}  from 'react';
 import {Link} from 'react-router-dom';
 import dayjs from 'dayjs';
 import DatePicker from 'react-datepicker';
@@ -12,7 +12,6 @@ const NuevoDia = () => {
         const newDate = dayjs(data).format('YYYY-M-D');
         setFormatedDay(newDate);
     };
-
 
     return (
         <div className='pt-12 px-6 h-5/6'>
