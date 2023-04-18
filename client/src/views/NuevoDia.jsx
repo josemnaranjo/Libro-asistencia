@@ -1,6 +1,7 @@
 import {React}  from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Formik,Form,Field} from 'formik';
+import dayjs from 'dayjs';
 
 const NuevoDia = () => {
     const navigate = useNavigate();
@@ -12,7 +13,9 @@ const NuevoDia = () => {
                     initialValues={{
                         date:''
                     }}
-                    onSubmit={(values)=>{navigate(`/registro-entrada/${values.date}`);
+                    onSubmit={(values)=>{
+                        const formatedDate = dayjs(values.data).format('YYYY-M-D');
+                        navigate(`/registro-entrada/${formatedDate}`);
                     }}
                 >
                     <Form className='text-center py-24'>
