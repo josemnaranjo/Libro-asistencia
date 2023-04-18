@@ -14,8 +14,9 @@ const NuevoDia = () => {
                         date:''
                     }}
                     onSubmit={(values)=>{
-                        const formatedDate = dayjs(values.data).format('YYYY-M-D');
-                        navigate(`/registro-entrada/${formatedDate}`);
+                        const formatedDate = dayjs(values.date);
+                        console.log(formatedDate);
+                        // navigate(`/registro-entrada/${formatedDate}`);
                     }}
                 >
                     <Form className='text-center py-24'>
