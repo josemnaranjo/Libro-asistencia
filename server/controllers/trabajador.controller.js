@@ -90,21 +90,12 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
             },
             order:[
                 ['trabajadorId', 'ASC']
-            ]
+            ],
+            include: Trabajador
         });
 
-        const trabajadoresFiltrados = jornadaInfo.map((trabajador)=>trabajador.trabajadorId);
-
-        const trabajadoresInfo = await Trabajador.findAll({
-            where:{
-                id: {[Op.in]:trabajadoresFiltrados}
-            },
-            order:[
-                ['id', 'ASC']
-            ]
-        })
-
-        res.json({trabajadoresInfo,jornadaInfo});
+        res.json({jornadaInfo});
+        
     }catch(err){
         res.status(500).json({error:"Algo salió mal al intentar recuperar la información solicitada",err})
     }
