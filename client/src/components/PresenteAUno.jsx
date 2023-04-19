@@ -6,7 +6,7 @@ const PresenteAUno = (props) => {
     let fechaAno = date.getFullYear();
     return (
         <div>
-            <div className='grid grid-rows-4 gap-y-14 mt-20'>
+            <div className='grid grid-rows-4 gap-y-14 py-10'>
 
                 <div className='grid grid-cols-3 justify-items-center'>
                     <h1>Enero</h1>
