@@ -28,7 +28,7 @@ function App() {
                 <Route path='libro-de-asistencias/:date' element={<LibroDeAsistencia/>}/>
                 <Route path='registro-entrada/:date' element={<RegistroEntrada/>}/>
                 <Route path='registro-salida/:date' element={<RegistroSalida/>}/>
-                <Route path='registro-ausentes' element={<RegistroAusentes/>}/>
+                <Route path='registro-ausentes/:date' element={<RegistroAusentes/>}/>
                 <Route path='registro-year/:year' element={<RegistroYear/>}/>
                 <Route path='editar-trabajador/:rut' element={<EditarTrabajador/>}/>
             </Routes>

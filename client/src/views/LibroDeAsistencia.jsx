@@ -19,7 +19,7 @@ const LibroDeAsistencia = () => {
                     <Link to={`/registro-salida/${date}`}>
                         <button className='bg-secondary-dark p-3.5 rounded-lg text-white'>registro de salida</button>
                     </Link>
-                    <Link to={'/registro-ausentes'}>
+                    <Link to={`/registro-ausentes/${date}`}>
                         <button className='bg-secondary-dark p-3.5 rounded-lg text-white'>indicar ausentes</button>
                     </Link>
                 </div>
