@@ -114,7 +114,7 @@ export const getAllTrabajadoresOfAJornada = async(req,res)=>{
 export const getInformeMes = async(req,res)=>{
     try{
         const {dateStart, mes, dateFinish } = req.body;
-        let nombreArchivo = "Informe_de_Asistencias";
+        let nombreArchivo = "Informe_de_Asistencias"+"_"+mes;
 
         const ws = wb.addWorksheet("Informe de asistencia"+"_"+mes);
 
@@ -135,7 +135,6 @@ export const getInformeMes = async(req,res)=>{
                 ['trabajadorId', 'ASC']
             ],
             include: Trabajador
-            
         });
 
         
