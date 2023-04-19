@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import dayjs from 'dayjs';
 import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
+import {registroDeAusentes} from '../services/jornada.services.js';
 
 const RegistroAusentes = () => {
 
@@ -13,11 +14,18 @@ const RegistroAusentes = () => {
         try{
             const information = await getAllTrabajadoresOfAJornada(date);
             setTrabajadorData(information.data.jornadaInfo);
-            console.log(information.data.jornadaInfo);
         }catch(err){
             console.log(err)
         }
     };
+
+    const registroDeAusentesFromService = async(values)=>{
+        try{
+            await registroDeAusentes(date,values);
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
         getAllTrabajadoresOfAJornadaFromService();
@@ -44,7 +52,9 @@ const RegistroAusentes = () => {
                                 <p>
                                     Hora Termino: {t.horaTermino}
                                 </p>
-                                <button className='bg-primary-dark py-1 w-24 rounded-lg text-white'>
+                                <button className='bg-primary-dark py-1 w-24 rounded-lg text-white'
+                                    onClick={()=>registroDeAusentesFromService({rut:t.Trabajador.rut})}
+                                >
                                     ausente
                                 </button>
                             </li>
