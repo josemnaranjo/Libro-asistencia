@@ -155,7 +155,7 @@ export const updateLicencia = async(req,res)=>{
         const {inicioLicencia, finLicencia} = req.body;
         const {rut} = req.params;
 
-        await Trabajador.update({inicioLicencia, finLicencia},{
+        await Trabajador.update({inicioLicencia, finLicencia, licencia:true},{
             where:{
                 rut:rut
             }

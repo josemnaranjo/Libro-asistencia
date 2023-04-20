@@ -42,6 +42,10 @@ export const Trabajador = sequelize.define('Trabajador', {
     },
     finLicencia:{
         type:DataTypes.DATEONLY,
+    },
+    licencia:{
+        type:DataTypes.BOOLEAN,
+        defaultValue: false
     }
 },{
     timestamps:false
