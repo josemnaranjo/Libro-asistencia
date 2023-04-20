@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import {getOneTrabajador, createLicencia} from '../services/trabajador.services.js';
 import {Formik,Form, Field} from 'formik';
 
+
+//usar DatePicker https://stackblitz.com/edit/demo-react-formik-datepicker?file=index.js
 const Licencias = () => {
     const {rut} = useParams();
     const [trabajador, setTrabajador] = useState();
