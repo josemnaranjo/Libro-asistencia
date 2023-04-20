@@ -168,4 +168,17 @@ export const updateLicencia = async(req,res)=>{
     }
 };
 
+export const getTrabajadoresWithLicencia = async(req,res)=>{
+    try{
+        const trabajadores = await Trabajador.findAll({
+            where:{
+                licencia:true
+            }
+        });
 
+        res.json(trabajadores)
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al obtener los trabajadores con licencia",err})
+    }
+}
