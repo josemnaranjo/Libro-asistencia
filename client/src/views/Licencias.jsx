@@ -1,10 +1,12 @@
 import {React, useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import {getOneTrabajador, createLicencia} from '../services/trabajador.services.js';
-import {Formik,Form, Field} from 'formik';
+import {Formik,Form} from 'formik';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
 
 
-//usar DatePicker https://stackblitz.com/edit/demo-react-formik-datepicker?file=index.js
+
 const Licencias = () => {
     const {rut} = useParams();
     const [trabajador, setTrabajador] = useState();
@@ -49,21 +51,37 @@ const Licencias = () => {
                         onSubmit={(values)=>createLicenciaFromService(values)}
                         enableReinitialize
                     >
+                        {({values,setFieldValue})=>
                         <Form>
                             <div className='grid grid-cols-2'>
                                 <div className='text-center'>
                                     <label htmlFor='inicio'>Inicio:</label>
-                                    <Field id='inicioLicencia' type='text' name='inicioLicencia' className='text-xs bg-white mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
+                                    <DatePicker
+                                        selected={values.inicioLicencia}
+                                        onChange={date=> setFieldValue('inicioLicencia',date)}
+                                        dateFormat={'dd-MM-yyyy'}
+                                        minDate={new Date()}
+                                        placeholderText='Elegir una fecha'
+                                        className='text-center text-sm bg-white w-48 py-1 px-2 rounded-lg border border-stone-400'
+                                    />
                                 </div>
                                 <div className='text-center'>
                                     <label htmlFor='termino'>Termino:</label>
-                                    <Field id='finLicencia' type='text' name='finLicencia' className='text-xs bg-white mx-2 w-64 p-1 rounded-lg border border-stone-400'/>
+                                    <DatePicker
+                                        selected={values.finLicencia}
+                                        onChange={date=> setFieldValue('finLicencia',date)}
+                                        dateFormat={'dd-MM-yyyy'}
+                                        minDate={new Date()}
+                                        placeholderText='Elegir una fecha'
+                                        className='text-center text-sm bg-white w-48 py-1 px-2 rounded-lg border border-stone-400'
+                                    />
                                 </div>
                             </div>
                             <div className='text-center py-10'>
                                 <button className='bg-secondary-dark p-2.5 rounded-lg text-white text-sm mt-5' type='submit'>registrar</button>
                             </div>
                         </Form>
+                        }
                     </Formik>
                 </div>
 
