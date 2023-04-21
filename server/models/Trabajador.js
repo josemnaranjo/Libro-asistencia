@@ -30,7 +30,6 @@ export const Trabajador = sequelize.define('Trabajador', {
             min:4,
         }
     },
-
     rut:{
         type:DataTypes.STRING,
         validate:{
@@ -48,7 +47,9 @@ export const Trabajador = sequelize.define('Trabajador', {
         defaultValue: false
     }
 },{
-    timestamps:false
+    paranoid: true,
+    deletedAt:'deletedAt',
+    timestamps:true,
 });
 
 Trabajador.hasMany(Jornada,{

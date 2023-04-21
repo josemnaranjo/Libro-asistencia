@@ -25,5 +25,7 @@ export const Jornada = sequelize.define('Jornada',{
         defaultValue: false
     }
 },{
-    timestamps:false
+    paranoid: true,
+    deletedAt:'deletedAt',
+    timestamps:true,
 });

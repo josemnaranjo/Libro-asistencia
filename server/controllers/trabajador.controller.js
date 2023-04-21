@@ -192,10 +192,11 @@ export const getInformeMesToVisual = async(req,res)=>{
                     [Op.between]:[dateStart,dateFinish]
                 },
             },
+            paranoid: false,
             order:[
                 ['trabajadorId', 'ASC']
             ],
-            include: Trabajador
+            include: Trabajador,
         });
 
         res.json(mesInfo);
