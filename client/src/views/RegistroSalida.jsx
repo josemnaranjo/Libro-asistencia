@@ -2,10 +2,11 @@ import React from 'react';
 import { registroDeSalida } from '../services/jornada.services.js';
 import {Formik, Form, Field} from 'formik';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 const RegistroDeSalida = () => {
     const {date} = useParams();
-
+    const dateForDisplay = dayjs(date).format('D-M-YYYY')
     const registroDeSalidaFromService = async(rut) =>{
         try{
             await registroDeSalida(date,rut);
@@ -18,7 +19,7 @@ const RegistroDeSalida = () => {
         <div className='pt-12 px-6 h-5/6'>
             <div className='px-10 py-28 h-5/6 bg-gradient-to-r from-slate-100 to-slate-300 border-xl rounded-xl'>
                 <h1 className='text-center py-2'>Registro de salida</h1>
-                <h1 className='text-center py-2'>{date}</h1>
+                <h1 className='text-center py-2'>{dateForDisplay}</h1>
                 <Formik
                     initialValues={{
                         rut:''
