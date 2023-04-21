@@ -12,6 +12,7 @@ import RegistroSalida from './views/RegistroSalida';
 import RegistroAusentes from './views/RegistroAusentes';
 import RegistroYear from './views/RegistroYear';
 import EditarTrabajador from './views/EditarTrabajador';
+import Informe from './views/Informe';
 
 
 function App() {
@@ -29,8 +30,9 @@ function App() {
                 <Route path='registro-entrada/:date' element={<RegistroEntrada/>}/>
                 <Route path='registro-salida/:date' element={<RegistroSalida/>}/>
                 <Route path='registro-ausentes/:date' element={<RegistroAusentes/>}/>
-                <Route path='registro-year/:year' element={<RegistroYear/>}/>
+                <Route path='registro-year/:year'element={<RegistroYear/>} />
                 <Route path='editar-trabajador/:rut' element={<EditarTrabajador/>}/>
+                <Route path='informe/:month' element={<Informe />}/>
             </Routes>
         </NavegacionLibroAsistencias>
     </div>

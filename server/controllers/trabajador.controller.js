@@ -181,4 +181,26 @@ export const getTrabajadoresWithLicencia = async(req,res)=>{
     }catch(err){
         res.status(500).json({error:"Algo salió mal al obtener los trabajadores con licencia",err})
     }
+};
+
+export const getInformeMesToVisual = async(req,res)=>{
+    try{
+        const {dateStart, dateFinish } = req.body;
+        const mesInfo = await Jornada.findAll({
+            where:{
+                date:{
+                    [Op.between]:[dateStart,dateFinish]
+                },
+            },
+            order:[
+                ['trabajadorId', 'ASC']
+            ],
+            include: Trabajador
+        });
+
+        res.json(mesInfo);
+
+    }catch(err){
+        res.status(500).json({error:"Algo salió mal al obtener la información",err})
+    }
 }

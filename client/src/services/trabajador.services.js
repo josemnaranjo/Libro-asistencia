@@ -44,3 +44,5 @@ export const getInformeMes = async({dateStart,mes,dateFinish}) => await axios({
 export const createLicencia = async(rut, values) => await axios.put(`http://localhost:8000/api/actualizar-licencia/${rut}`,values);
 
 export const getTrabajadoresWithLicencia = async() => await axios.get('http://localhost:8000/api/obtener-trabajadores-licencia');
+
+export const getInformeVisualMes = async(values)=>await axios.post('http://localhost:8000/api/obtener-informe-visual-mes',values);
