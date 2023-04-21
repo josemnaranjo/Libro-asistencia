@@ -75,26 +75,26 @@ const Informe = () => {
     return (
         <div className='pt-12 px-6 h-5/6'>
             <div className='px-10 py-10 h-5/6 bg-gradient-to-r from-slate-100 to-slate-300 border-xl rounded-xl'>
-                <table className='table-auto'>
-                    <thead>
+                <table className='text-center mx-auto w-full border-2 border-white border-separate table-auto '>
+                    <thead className='bg-primary-dark text-white'>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Rut</th>
-                            <th>Fecha</th>
-                            <th>Hora Inicio</th>
-                            <th>Hora Término</th>
-                            <th>Ausente</th>
+                            <th className='px-3'>Nombre</th>
+                            <th className='px-3'>Rut</th>
+                            <th className='px-3'>Fecha</th>
+                            <th className='px-3'>Hora Inicio</th>
+                            <th className='px-3'>Hora Término</th>
+                            <th className='px-3'>Ausente</th>
                         </tr>
                     </thead>
                     <tbody>
                         {trabajadores?.map(t=>(
                             <tr key={t.id}>
-                                <td>{t.Trabajador.name} {t.Trabajador.lastName}</td>
-                                <td>{t.Trabajador.rut}</td>
-                                <td>{t.date}</td>
-                                <td>{t.horaInicio}</td>
-                                <td>{t.horaTermino}</td>
-                                <td>{t.ausente ? "si" : "no"}</td>
+                                <td className='p-3 border border-white'>{t.Trabajador.name} {t.Trabajador.lastName}</td>
+                                <td className='p-3 border border-white'>{t.Trabajador.rut}</td>
+                                <td className='p-3 border border-white'>{dayjs(t.date).format('D-M-YYYY')}</td>
+                                <td className='p-3 border border-white'>{t.horaInicio}</td>
+                                <td className='p-3 border border-white'>{t.horaTermino}</td>
+                                <td className='p-3 border border-white'>{t.ausente ? "si" : "no"}</td>
                             </tr>
                         ))}
                     </tbody>
