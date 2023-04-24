@@ -52,11 +52,21 @@ export const getOneTrabajador = async (req,res)=> {
 export const deleteOneTrabajador = async (req,res)=>{
     try{
         const {rut} = req.params;
+        
+        const trabajador = await Trabajador.findAll({where: {rut:rut}});
+        const trabajadorId = trabajador[0].id;
+
+        await Jornada.destroy({
+            where:{
+                trabajadorId:trabajadorId
+            }
+        });
+
         await Trabajador.destroy({
             where:{
                 rut: rut
             }
-        })
+        });
         res.json({menssage: "Trabajador eliminado de la base de datos"});
 
     }catch(err){
@@ -125,7 +135,11 @@ export const getInformeMes = async(req,res)=>{
             order:[
                 ['trabajadorId', 'ASC']
             ],
-            include: Trabajador
+            include: [{
+                model: Trabajador,
+                paranoid:false
+            }], 
+            paranoid: false
         });
 
         
@@ -192,11 +206,14 @@ export const getInformeMesToVisual = async(req,res)=>{
                     [Op.between]:[dateStart,dateFinish]
                 },
             },
-            paranoid: false,
             order:[
                 ['trabajadorId', 'ASC']
             ],
-            include: Trabajador,
+            include: [{
+                model: Trabajador,
+                paranoid:false
+            }], 
+            paranoid: false
         });
 
         res.json(mesInfo);

@@ -54,7 +54,7 @@ export const Trabajador = sequelize.define('Trabajador', {
 
 Trabajador.hasMany(Jornada,{
     foreignKey:'trabajadorId',
-    sourceKey:'id'
+    sourceKey:'id',
 });
 
 Jornada.belongsTo(Trabajador,{
