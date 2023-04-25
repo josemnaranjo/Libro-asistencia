@@ -2,21 +2,12 @@ import React from 'react';
 import {Formik, Field,Form} from 'formik';
 import * as Yup from 'yup';
 import { addTrabajador } from '../services/trabajador.services';
-import {Report} from 'notiflix/build/notiflix-report-aio';
+
 
 const NuevoTrabajador = () => {
     const addTrabajadorFromService = async (values) =>{
         try{
             await addTrabajador(values);
-            Report.success(
-                "Nuevo trabajador creado",
-                "",
-                "Aceptar",
-                {
-                    backgroundColor:"#FFBF18",
-                    titleColor:"#FFFFFF"
-                },   
-            )
         }catch(err){
             console.log(err)
         }
