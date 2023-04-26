@@ -3,6 +3,7 @@ import { registroDeSalida } from '../services/jornada.services.js';
 import {Formik, Form, Field} from 'formik';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import Swal from 'sweetalert2';
 
 const RegistroDeSalida = () => {
     const {date} = useParams();
@@ -10,6 +11,16 @@ const RegistroDeSalida = () => {
     const registroDeSalidaFromService = async(rut) =>{
         try{
             await registroDeSalida(date,rut);
+            Swal.fire({
+                icon:'success',
+                text:'registro de salida actualizado',
+                timer:2000,
+                timerProgressBar:true,
+                background:'#FFBF18',
+                color:'#ffff',
+                showConfirmButton:false,
+                padding:'3em'
+            })
         }catch(err){
             console.log(err)
         }

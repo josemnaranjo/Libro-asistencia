@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom';
 import dayjs from 'dayjs';
 import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
 import {registroDeAusentes} from '../services/jornada.services.js';
+import Swal from 'sweetalert2';
 
 const RegistroAusentes = () => {
 
@@ -21,7 +22,35 @@ const RegistroAusentes = () => {
 
     const registroDeAusentesFromService = async(values)=>{
         try{
-            await registroDeAusentes(date,values);
+            Swal.fire({
+                icon:'warning',
+                iconColor:'#2236D6',
+                html:
+                    `<p>¿Estás seguro que el trabajador estuvo ausente el día ${trabajadorData[0].date} ?</p>`,
+                showCancelButton:true,
+                background:'#FFBF18',
+                color:'#ffff',
+                padding:'5em',
+                confirmButtonColor:'#2236D6',
+                cancelButtonColor:'#6272EE',
+                confirmButtonText:'confirmar',
+                cancelButtonText:'rechazar'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    registroDeAusentes(date,values);
+                    Swal.fire({
+                        icon:'success',
+                        text:'registro de ausencia actualizado',
+                        timer:2000,
+                        timerProgressBar:true,
+                        background:'#FFBF18',
+                        color:'#ffff',
+                        showConfirmButton:false,
+                        padding:'3em'
+                    });
+                    
+                }
+            })
         }catch(err){
             console.log(err);
         }
@@ -52,8 +81,8 @@ const RegistroAusentes = () => {
                                 <p>
                                     Hora Termino: {t.horaTermino}
                                 </p>
-                                <button className='bg-primary-dark py-1 w-24 rounded-lg text-white'
-                                    onClick={()=>registroDeAusentesFromService({rut:t.Trabajador.rut})}
+                                <button className={'bg-primary-dark py-1 w-24 rounded-lg text-white'}
+                                    onClick={() => {registroDeAusentesFromService({rut:t.Trabajador.rut})}}
                                 >
                                     ausente
                                 </button>

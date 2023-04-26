@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import {getOneTrabajador, createLicencia} from '../services/trabajador.services.js';
 import {Formik,Form} from 'formik';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
+import Swal from 'sweetalert2';
+import dayjs from 'dayjs';
+
 
 
 
@@ -22,8 +25,39 @@ const Licencias = () => {
 
     const createLicenciaFromService =async(values)=>{
         try{
-            await createLicencia(rut,values);
-            console.log("exito")
+    
+            Swal.fire({
+                icon:'warning',
+                iconColor:'#2236D6',
+                title:'Por favor, confirmar si la información es correcta',
+                html:
+                    `<h1>${trabajador.name} ${trabajador.lastName}</h1>
+                    <h1>rut: ${trabajador.rut}</h1>
+                    <p>inicio: ${dayjs(values.inicioLicencia).format('D-M-YYYY')}</p>
+                    <p>término: ${dayjs(values.inicioLicencia).format('D-M-YYYY')}</p> `,
+                showCancelButton:true,
+                background:'#FFBF18',
+                color:'#ffff',
+                padding:'5em',
+                confirmButtonColor:'#2236D6',
+                cancelButtonColor:'#6272EE',
+                confirmButtonText:'confirmar',
+                cancelButtonText:'rechazar'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    createLicencia(rut,values);
+                    Swal.fire({
+                        icon:'success',
+                        text:'registro de licencia actualizado',
+                        timer:2000,
+                        timerProgressBar:true,
+                        background:'#FFBF18',
+                        color:'#ffff',
+                        showConfirmButton:false,
+                        padding:'3em'
+                    })
+                }
+            })
         }catch(err){
             console.log(err)
         }

@@ -2,12 +2,23 @@ import React from 'react';
 import {Formik, Field,Form} from 'formik';
 import * as Yup from 'yup';
 import { addTrabajador } from '../services/trabajador.services';
+import Swal from 'sweetalert2';
 
 
 const NuevoTrabajador = () => {
     const addTrabajadorFromService = async (values) =>{
         try{
             await addTrabajador(values);
+            Swal.fire({
+                icon: 'success',
+                text:'trabajador agregado a la base de dato',
+                timer:2000,
+                timerProgressBar:true,
+                background:'#FFBF18',
+                color:'#ffff',
+                showConfirmButton:false,
+                padding:'3em'
+            })
         }catch(err){
             console.log(err)
         }
