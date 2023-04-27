@@ -10,8 +10,10 @@ const RegistroAusentes = () => {
 
     const {date} = useParams();
     const dateFormated = dayjs(date).format('D-M-YYYY');
-    const [trabajadorData,setTrabajadorData] = useState();
+    const [trabajadorData,setTrabajadorData] = useState([]);
     const [disableButtons, setDisabledButtons] = useState([]);
+    const [currentPage,setCurrentPage] = useState(1);
+    const [postPerPage] = useState(9)
 
     const getAllTrabajadoresOfAJornadaFromService = async()=>{
         try{
@@ -65,6 +67,18 @@ const RegistroAusentes = () => {
         getAllTrabajadoresOfAJornadaFromService();
     }, []);
 
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = trabajadorData.slice(indexOfFirstPost, indexOfLastPost);
+
+    const pageNumbers = [];
+
+    for(let i = 1; i <= Math.ceil(trabajadorData.length/postPerPage); i++ ){
+        pageNumbers.push(i);
+    };
+
+    const paginate = pageNumbers => setCurrentPage(pageNumbers);
+
 
     return (
         <div className='pt-12 px-6 h-5/6'>
@@ -72,7 +86,7 @@ const RegistroAusentes = () => {
                 <h1 className='text-center'>Registro de ausentes : {dateFormated}</h1>
                 <ul className='py-5'>
                     {
-                        trabajadorData?.map((t,i)=>(
+                        currentPosts?.map((t,i)=>(
                             <li key={t.id} className='grid grid-cols-5 py-2 justify-items-center'>
                                 <p>
                                     Nombre: {t.Trabajador.name} {t.Trabajador.lastName}
@@ -97,6 +111,17 @@ const RegistroAusentes = () => {
                         ))
                     }
                 </ul>
+                <nav>
+                    <ul className='flex py-3 justify-center gap-3 '>
+                        {pageNumbers.map(n => (
+                            <li key={n}>
+                                <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={() => paginate(n)}>
+                                    {n}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
             </div>
         </div>
     );

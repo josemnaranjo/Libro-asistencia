@@ -64,7 +64,7 @@ const Home = () => {
                     <ul className='flex py-3 justify-center gap-3 '>
                         {pageNumbers.map(n => (
                             <li key={n}>
-                                <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={()=> paginate(n)}>
+                                <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={() => paginate(n)}>
                                     {n}
                                 </button>
                             </li>
