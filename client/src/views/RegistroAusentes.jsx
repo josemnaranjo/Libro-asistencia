@@ -5,11 +5,13 @@ import {getAllTrabajadoresOfAJornada} from '../services/trabajador.services.js';
 import {registroDeAusentes} from '../services/jornada.services.js';
 import Swal from 'sweetalert2';
 
+
 const RegistroAusentes = () => {
 
     const {date} = useParams();
     const dateFormated = dayjs(date).format('D-M-YYYY');
     const [trabajadorData,setTrabajadorData] = useState();
+    const [disableButtons, setDisabledButtons] = useState([]);
 
     const getAllTrabajadoresOfAJornadaFromService = async()=>{
         try{
@@ -19,6 +21,10 @@ const RegistroAusentes = () => {
             console.log(err)
         }
     };
+
+    const handleDisableButtonsClick = (i) => {
+        setDisabledButtons(prevDisableButtons => [...prevDisableButtons,i])
+    }
 
     const registroDeAusentesFromService = async(values)=>{
         try{
@@ -48,7 +54,6 @@ const RegistroAusentes = () => {
                         showConfirmButton:false,
                         padding:'3em'
                     });
-                    
                 }
             })
         }catch(err){
@@ -67,7 +72,7 @@ const RegistroAusentes = () => {
                 <h1 className='text-center'>Registro de ausentes : {dateFormated}</h1>
                 <ul className='py-5'>
                     {
-                        trabajadorData?.map((t)=>(
+                        trabajadorData?.map((t,i)=>(
                             <li key={t.id} className='grid grid-cols-5 py-2 justify-items-center'>
                                 <p>
                                     Nombre: {t.Trabajador.name} {t.Trabajador.lastName}
@@ -81,11 +86,13 @@ const RegistroAusentes = () => {
                                 <p>
                                     Hora Termino: {t.horaTermino}
                                 </p>
-                                <button className={'bg-primary-dark py-1 w-24 rounded-lg text-white'}
-                                    onClick={() => {registroDeAusentesFromService({rut:t.Trabajador.rut})}}
+                                <button className={disableButtons.includes(i) ? 'bg-white border-2 border-orange-500 cursor-not-allowed py-1 w-24 rounded-lg': 'bg-primary-dark py-1 w-24 rounded-lg text-white'}
+                                    onClick={() => {registroDeAusentesFromService({rut:t.Trabajador.rut}); handleDisableButtonsClick(i)}}
+                                    disabled={disableButtons.includes(i)}
                                 >
                                     ausente
                                 </button>
+                                
                             </li>
                         ))
                     }

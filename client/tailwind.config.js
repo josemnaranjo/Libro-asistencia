@@ -19,12 +19,14 @@ module.exports = {
         fontFamily:
         {
             'poppins': ['Poppins','sans-serif']
-        }
+        },
+        disabledButton: 'bg-white border-2 border-orange-500 cursor-not-allowed py-1 w-24 rounded-lg ',
+        enabledButton:'bg-primary-dark py-1 w-24 rounded-lg text-white',
     },
   },
   variants:{
-    extends:{
-        display:['group-focus']
+    extend:{
+        display:['group-focus'],
     }
   },
   plugins: [],
