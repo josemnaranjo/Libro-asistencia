@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 const Home = () => {
     const [trabajadores,setTrabajadores] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
-    const [postPerPage] = useState(9)
+    const [postPerPage] = useState(5)
 
     const getTrabajadoresWithLicenciaFromService = async() =>{
         try{
@@ -62,13 +62,13 @@ const Home = () => {
                 </ul>
                 <nav>
                     <ul className='flex py-3 justify-center gap-3 '>
-                        {pageNumbers.map(n => (
+                        {pageNumbers === 1 ? pageNumbers.map(n => (
                             <li key={n}>
                                 <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={() => paginate(n)}>
                                     {n}
                                 </button>
                             </li>
-                        ))}
+                        )): null}
                     </ul>
                 </nav>
 
