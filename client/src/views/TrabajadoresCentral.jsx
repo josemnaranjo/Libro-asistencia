@@ -5,19 +5,36 @@ import { useNavigate } from 'react-router-dom';
 const TrabajadoresCentral = () => {
     const [trabajadores,setTrabajadores] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
-    const [postPerPage] = useState(9)
+    const [postPerPage] = useState(9);
+    const [searchInput,setSearchInput] = useState("");
     const navigate = useNavigate();
 
-    const getAllTrabajadoresFromService = async() => {
+
+    //obtener todos los trabajadores
+    const getAllTrabajadoresFromService = async(value) => {
         try{
-            const res = await getAllTrabajadores();
-            setTrabajadores(res.data);
+            if(value === null){
+                const info = await getAllTrabajadores();
+                setTrabajadores(info.data);
+            } else {
+                const info = await getAllTrabajadores();
+                const res = info.data.filter((user)=> {
+                    return user && user.name && user.name.toLowerCase().includes(value)
+                })
+                setTrabajadores(res);
+            }
 
         }catch(err){
             console.log(err)
         }
     };
 
+
+    useEffect(() => {
+        getAllTrabajadoresFromService(null);
+    }, []);
+
+    //borrar un trabajador
     const deleteTrabajador = async(rut)=>{
         try{
             const newArray = trabajadores.filter(trabajador => trabajador.rut !== rut);
@@ -29,10 +46,20 @@ const TrabajadoresCentral = () => {
         }
     };
 
-    useEffect(() => {
-        getAllTrabajadoresFromService();
-    }, []);
+        //buscador de trabajadores
+        const handleChange = e => {
+            e.preventDefault();
+            setSearchInput(e.target.value);
+            getAllTrabajadoresFromService(e.target.value)
+        };
+    
+        if(searchInput.length > 0){
+            trabajadores.filter((trabajador)=>{
+                return trabajador.name.match(searchInput);
+            });
+        }
 
+    //paginación
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
     const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
@@ -54,8 +81,12 @@ const TrabajadoresCentral = () => {
 
                     {/* buscador */}
                     <div>
-                        <input type='text' />
-                        <button className='bg-secondary-dark p-1.5 rounded-lg text-white ml-2'>buscar</button>
+                        <input 
+                            type='search'
+                            placeholder='buscar trabajador'
+                            onChange={handleChange}
+                            value={searchInput}
+                            />
                     </div>
 
                     {/* buton crear nuevo trabajador */}
