@@ -86,6 +86,7 @@ const TrabajadoresCentral = () => {
                             placeholder='buscar trabajador'
                             onChange={handleChange}
                             value={searchInput}
+                            className=' px-2 py-1 placeholder:italic placeholder:text-sm rounded-md'
                             />
                     </div>
 
