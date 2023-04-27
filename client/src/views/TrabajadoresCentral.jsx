@@ -3,7 +3,9 @@ import { getAllTrabajadores, deleteOneTrabajador  } from '../services/trabajador
 import { useNavigate } from 'react-router-dom';
 
 const TrabajadoresCentral = () => {
-    const [trabajadores,setTrabajadores] = useState();
+    const [trabajadores,setTrabajadores] = useState([]);
+    const [currentPage,setCurrentPage] = useState(1);
+    const [postPerPage] = useState(9)
     const navigate = useNavigate();
 
     const getAllTrabajadoresFromService = async() => {
@@ -31,6 +33,18 @@ const TrabajadoresCentral = () => {
         getAllTrabajadoresFromService();
     }, []);
 
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
+
+    const pageNumbers = [];
+
+    for(let i = 1; i <= Math.ceil(trabajadores.length/postPerPage); i++ ){
+        pageNumbers.push(i);
+    };
+
+    const paginate = pageNumbers => setCurrentPage(pageNumbers);
+
     return (
         <div className='pt-12 px-6 h-5/6'>
             <div className='px-10 py-10 h-5/6 bg-gradient-to-r from-slate-100 to-slate-300 border-xl rounded-xl'>
@@ -52,7 +66,7 @@ const TrabajadoresCentral = () => {
                 {/* div inferior */}
                 <div className='mt-10 max-h-full'>
                     <ul>
-                        {trabajadores?.map((t)=>(
+                        {currentPosts?.map((t)=>(
                         <li key={t.id} className='grid grid-cols-5 gap-x-36 py-1'> 
                             <p>{t.name} {t.lastName}</p>
                             <p className='text-center'> {t.rut}</p>
@@ -63,7 +77,17 @@ const TrabajadoresCentral = () => {
                         ))}
                     </ul>
                 </div>
-
+                <nav>
+                    <ul className='flex py-3 justify-center gap-3 '>
+                        {pageNumbers.map(n => (
+                            <li key={n}>
+                                <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={()=> paginate(n)}>
+                                    {n}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
             </div>
         </div>
     );
