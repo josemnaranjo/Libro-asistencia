@@ -1,80 +1,80 @@
-import React, {useState,useEffect} from 'react';
-import { getTrabajadoresWithLicencia } from '../services/trabajador.services.js';
-import dayjs from 'dayjs';
+import React, { useState, useEffect } from "react";
+import { getTrabajadoresWithLicencia } from "../services/trabajador.services.js";
+import dayjs from "dayjs";
 
 const Home = () => {
-    const [trabajadores,setTrabajadores] = useState([]);
-    const [currentPage,setCurrentPage] = useState(1);
-    const [postPerPage] = useState(5)
+  const [trabajadores, setTrabajadores] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(5);
 
-    const getTrabajadoresWithLicenciaFromService = async() =>{
-        try{
-            const information = await getTrabajadoresWithLicencia();
-            setTrabajadores(information.data)
-        }catch(err){
-            console.log(err)
-        }
-    };
+  const getTrabajadoresWithLicenciaFromService = async () => {
+    try {
+      const information = await getTrabajadoresWithLicencia();
+      setTrabajadores(information.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    useEffect(() => {
-        getTrabajadoresWithLicenciaFromService();
-    }, []);
+  useEffect(() => {
+    getTrabajadoresWithLicenciaFromService();
+  }, []);
 
-    const indexOfLastPost = currentPage * postPerPage;
-    const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
 
-    const pageNumbers = [];
+  const pageNumbers = [];
 
-    for(let i = 1; i <= Math.ceil(trabajadores.length/postPerPage); i++ ){
-        pageNumbers.push(i);
-    };
+  for (let i = 1; i <= Math.ceil(trabajadores.length / postPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
-    const paginate = pageNumbers => setCurrentPage(pageNumbers);
+  const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 
-    return (
-        <div className='pt-12 px-6 h-5/6'>
-            <div className='px-10 py-10 h-5/6 bg-gradient-to-r from-slate-100 to-slate-300 border-xl rounded-xl'>
-                <h1 className='text-center'>Trabajadores con licencia</h1>
-                <ul className='py-5'>
-                    {
-                        currentPosts?.map(t=>(
-                            <li key={t.id} className='grid grid-cols-4 justify-items-center py-5'>
-                                <p>
-                                    {t.name} {t.lastName}
-                                </p>
+  return (
+    <div className="h-5/6 px-6 pt-12">
+      <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
+        <h1 className="text-center">Trabajadores con licencia</h1>
+        <ul className="py-5">
+          {currentPosts?.map((t) => (
+            <li
+              key={t.id}
+              className="grid grid-cols-4 justify-items-center py-5"
+            >
+              <p>
+                {t.name} {t.lastName}
+              </p>
 
-                                <p>
-                                    {t.rut}
-                                </p>
+              <p>{t.rut}</p>
 
-                                <p>
-                                    Fecha de inicio: {dayjs(t.inicioLicencia).format('D-M-YYYY')}
-                                </p>
+              <p>
+                Fecha de inicio: {dayjs(t.inicioLicencia).format("D-M-YYYY")}
+              </p>
 
-                                <p>
-                                    Fecha término: {dayjs(t.finLicencia).format('D-M-YYYY')}
-                                </p>
-
-                            </li>
-                        ))
-                    }
-                </ul>
-                <nav>
-                    <ul className='flex py-3 justify-center gap-3 '>
-                        {pageNumbers === 1 ? null: pageNumbers.map(n => (
-                            <li key={n}>
-                                <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={() => paginate(n)}>
-                                    {n}
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
-    );
-}
+              <p>Fecha término: {dayjs(t.finLicencia).format("D-M-YYYY")}</p>
+            </li>
+          ))}
+        </ul>
+        <nav>
+          <ul className="flex justify-center gap-3 py-3 ">
+            {pageNumbers === 1
+              ? null
+              : pageNumbers.map((n) => (
+                  <li key={n}>
+                    <button
+                      className="rounded-full bg-primary-middle px-2 text-white ring-1 ring-white "
+                      onClick={() => paginate(n)}
+                    >
+                      {n}
+                    </button>
+                  </li>
+                ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+};
 
 export default Home;
