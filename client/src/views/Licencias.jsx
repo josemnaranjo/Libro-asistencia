@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {getOneTrabajador, createLicencia} from '../services/trabajador.services.js';
 import {Formik,Form} from 'formik';
 import DatePicker from 'react-datepicker';
@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 const Licencias = () => {
     const {rut} = useParams();
     const [trabajador, setTrabajador] = useState();
+    const navigate = useNavigate();
 
     const getAllTrabajadoresFromService = async() => {
         try{
@@ -55,7 +56,8 @@ const Licencias = () => {
                         color:'#ffff',
                         showConfirmButton:false,
                         padding:'3em'
-                    })
+                    });
+                    navigate('/trabajadores');
                 }
             })
         }catch(err){

@@ -62,13 +62,13 @@ const Home = () => {
                 </ul>
                 <nav>
                     <ul className='flex py-3 justify-center gap-3 '>
-                        {pageNumbers === 1 ? pageNumbers.map(n => (
+                        {pageNumbers === 1 ? null: pageNumbers.map(n => (
                             <li key={n}>
                                 <button className='ring-1 ring-white rounded-full bg-primary-middle px-2 text-white ' onClick={() => paginate(n)}>
                                     {n}
                                 </button>
                             </li>
-                        )): null}
+                        ))}
                     </ul>
                 </nav>
 
