@@ -40,7 +40,7 @@ export const Trabajador = sequelize.define(
       },
       validate: {
         is: {
-            args: /^(\d{1,2}\.\d{3}\.\d{3}|\d{1,2}\.\d{3}\.\d{3}-[\dkK])$/,
+            args: /^[0-9]{7,8}[-]{0,1}[0-9kK]{1}$/,
             msg: "El RUT ingresado no es válido"
         }
       },

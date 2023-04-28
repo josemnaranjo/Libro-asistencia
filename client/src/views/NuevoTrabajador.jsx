@@ -91,6 +91,7 @@ const NuevoTrabajador = () => {
                           type="text"
                           name="rut"
                           className="ml-9 mt-5 w-64 rounded-lg border border-stone-400 bg-white p-1 text-xs"
+                          placeholder="XXXXXXXX-X"
                         />
                         {errors.rut && touched.rut ? (
                           <p className="text-red-600">{errors.rut}</p>
@@ -164,6 +165,7 @@ const NuevoTrabajador = () => {
                           type="text"
                           name="rut"
                           className="ml-9 mt-5 w-64 rounded-lg border border-stone-400 bg-white p-1 text-xs"
+                          placeholder="XXXXXXXX-X"
                         />
                         {errors.rut && touched.rut ? (
                           <p className="text-red-600">{errors.rut}</p>
@@ -237,6 +239,7 @@ const NuevoTrabajador = () => {
                           type="text"
                           name="rut"
                           className="ml-9 mt-5 w-64 rounded-lg border border-stone-400 bg-white p-1 text-xs"
+                          placeholder="XXXXXXXX-X"
                         />
                         {errors.rut && touched.rut ? (
                           <p className="text-red-600">{errors.rut}</p>
