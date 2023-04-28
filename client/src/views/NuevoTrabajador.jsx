@@ -48,7 +48,6 @@ const NuevoTrabajador = () => {
                 rut: "",
               }}
               validationSchema={valSchema}
-              //agregar servicio de agregar trabajador
               onSubmit={(values, { resetForm }) => {
                 addTrabajadorFromService(values);
                 resetForm();
