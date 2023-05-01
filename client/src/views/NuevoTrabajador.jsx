@@ -41,7 +41,7 @@ const NuevoTrabajador = () => {
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <h1 className="text-center text-2xl">Formulario de nuevo trabajador</h1>
-        <div className="py-20 mt-20">
+        <div className="mt-20 py-20">
           <Formik
             initialValues={{
               name: "",
