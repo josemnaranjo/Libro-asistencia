@@ -79,7 +79,7 @@ const RegistroAusentes = () => {
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
-        <h1 className="text-center">Registro de ausentes : {dateFormated}</h1>
+        <h1 className="text-center text-2xl">Registro de ausentes : {dateFormated}</h1>
         <ul className="py-5">
           {currentPosts?.map((t, i) => (
             <li

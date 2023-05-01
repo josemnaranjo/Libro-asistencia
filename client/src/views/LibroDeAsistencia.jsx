@@ -8,8 +8,8 @@ const LibroDeAsistencia = () => {
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-40">
-        <h1 className="py-3 text-center">Registro de asistencia</h1>
-        <h1 className="py-2 text-center">{dateForDisplay}</h1>
+        <h1 className="py-3 text-center text-2xl">Registro de asistencia</h1>
+        <h1 className="py-2 text-center text-lg">{dateForDisplay}</h1>
 
         <div className="grid grid-cols-3 justify-items-center py-10">
           <Link to={`/registro-entrada/${date}`}>

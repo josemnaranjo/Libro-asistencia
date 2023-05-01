@@ -29,8 +29,8 @@ const RegistroDeSalida = () => {
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-28">
-        <h1 className="py-2 text-center">Registro de salida</h1>
-        <h1 className="py-2 text-center">{dateForDisplay}</h1>
+        <h1 className="py-2 text-center text-2xl">Registro de salida</h1>
+        <h1 className="py-2 text-center text-lg">{dateForDisplay}</h1>
         <Formik
           initialValues={{
             rut: "",
@@ -42,7 +42,7 @@ const RegistroDeSalida = () => {
         >
           <Form className="py-12">
             <div className="grid grid-rows-2 justify-items-center gap-3">
-              <label htmlFor="rut">Ingrese su rut</label>
+              <label htmlFor="rut" className="text-lg">Ingrese su rut</label>
               <Field
                 id="rut"
                 type="text"
@@ -54,7 +54,7 @@ const RegistroDeSalida = () => {
 
             <div className="py-9 text-center">
               <button
-                className="rounded-lg bg-secondary-dark p-2.5 text-xs text-white"
+                className="rounded-lg bg-secondary-dark p-2.5 text-xs text-white text-sm"
                 type="submit"
               >
                 aceptar
