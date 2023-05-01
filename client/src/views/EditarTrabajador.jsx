@@ -34,12 +34,14 @@ const EditarTrabajador = () => {
   }, []);
   return (
     <div className="h-5/6 px-6 pt-12">
-      <EditarTrabajadorForm
-        name={trabajador?.name}
-        lastName={trabajador?.lastName}
-        rut={trabajador?.rut}
-        onSubmitProp={updateTrabajadorFromService}
-      />
+      <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-44">
+        <EditarTrabajadorForm
+          name={trabajador?.name}
+          lastName={trabajador?.lastName}
+          rut={trabajador?.rut}
+          onSubmitProp={updateTrabajadorFromService}
+        />
+      </div>
     </div>
   );
 };
