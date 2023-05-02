@@ -12,7 +12,7 @@ const NuevoTrabajador = () => {
       Swal.fire({
         icon: "success",
         text: "trabajador agregado a la base de dato",
-        timer: 1500,
+        timer: 1000,
         timerProgressBar: true,
         showConfirmButton: false,
         padding: "3em",

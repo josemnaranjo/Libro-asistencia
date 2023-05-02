@@ -14,10 +14,8 @@ const RegistroDeSalida = () => {
       Swal.fire({
         icon: "success",
         text: "registro de salida actualizado",
-        timer: 2000,
+        timer: 1000,
         timerProgressBar: true,
-        background: "#FFBF18",
-        color: "#ffff",
         showConfirmButton: false,
         padding: "3em",
       });
