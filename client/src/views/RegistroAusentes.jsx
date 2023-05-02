@@ -33,8 +33,6 @@ const RegistroAusentes = () => {
         iconColor: "#2236D6",
         html: `<p>¿Estás seguro que el trabajador estuvo ausente el día ${trabajadorData[0].date} ?</p>`,
         showCancelButton: true,
-        background: "#FFBF18",
-        color: "#ffff",
         padding: "5em",
         confirmButtonColor: "#2236D6",
         cancelButtonColor: "#6272EE",
@@ -46,13 +44,12 @@ const RegistroAusentes = () => {
           Swal.fire({
             icon: "success",
             text: "registro de ausencia actualizado",
-            timer: 2000,
+            timer: 1000,
             timerProgressBar: true,
-            background: "#FFBF18",
-            color: "#ffff",
             showConfirmButton: false,
             padding: "3em",
           });
+          handleDisableButtonsClick(values.rut)
         }
       });
     } catch (err) {
@@ -94,15 +91,14 @@ const RegistroAusentes = () => {
               <p>Hora Termino: {t.horaTermino}</p>
               <button
                 className={
-                  disableButtons.includes(i)
+                  disableButtons.includes(t.Trabajador.rut)
                     ? "w-24 cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white py-1"
                     : "w-24 rounded-lg bg-primary-dark py-1 text-white"
                 }
                 onClick={() => {
                   registroDeAusentesFromService({ rut: t.Trabajador.rut });
-                  handleDisableButtonsClick(i);
                 }}
-                disabled={disableButtons.includes(i)}
+                disabled={disableButtons.includes(t.Trabajador.rut)}
               >
                 ausente
               </button>
