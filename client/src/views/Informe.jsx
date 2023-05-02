@@ -160,7 +160,7 @@ const Informe = () => {
             {pageNumbers.map((n) => (
               <li key={n}>
                 <button
-                  className="rounded-full bg-primary-middle px-2 text-white ring-1 ring-white "
+                  className={currentPage === n ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white" : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"}
                   onClick={() => paginate(n)}
                 >
                   {n}
