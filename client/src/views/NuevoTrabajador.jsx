@@ -3,6 +3,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { addTrabajador } from "../services/trabajador.services";
 import Swal from "sweetalert2";
+import {formatString} from 'format-as-you-type';
 
 const NuevoTrabajador = () => {
   const [error, setError] = useState([]);
@@ -12,10 +13,8 @@ const NuevoTrabajador = () => {
       Swal.fire({
         icon: "success",
         text: "trabajador agregado a la base de dato",
-        timer: 2000,
+        timer: 1500,
         timerProgressBar: true,
-        background: "#FFBF18",
-        color: "#ffff",
         showConfirmButton: false,
         padding: "3em",
       });
@@ -34,9 +33,14 @@ const NuevoTrabajador = () => {
       .min(3, "El apellido del trabajador debe tener más de 3 caracteres")
       .required("Por favor, ingresar el apellido del trabajador"),
 
-    //queda pendiente validación de formato de rut
     rut: Yup.string().required("Por favor, ingresar el rut del trabajador"),
   });
+
+  const formatRut = (newImput) => {
+    return formatString(newImput, '00.000.000-0');
+  }
+
+
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
@@ -93,6 +97,8 @@ const NuevoTrabajador = () => {
                         name="rut"
                         className="ml-9 mt-5 w-64 rounded-lg border border-stone-400 bg-white p-1 text-xs"
                         placeholder="XXXXXXXX-X"
+                        onChange={(event)=>console.log(event.target.value)}
+                        
                       />
                       {errors.rut && touched.rut ? (
                         <p className="text-red-600">{errors.rut}</p>
