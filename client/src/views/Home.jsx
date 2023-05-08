@@ -1,16 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { getTrabajadoresWithLicencia } from "../services/trabajador.services.js";
+import { useNavigate } from "react-router-dom";
+import {
+  getTrabajadoresWithLicencia,
+  resetLicencia,
+} from "../services/trabajador.services.js";
 import dayjs from "dayjs";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [trabajadores, setTrabajadores] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(5);
+  const navigate = useNavigate();
 
   const getTrabajadoresWithLicenciaFromService = async () => {
     try {
       const information = await getTrabajadoresWithLicencia();
       setTrabajadores(information.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const resetLicenciaFromService = async (values) => {
+    try {
+      Swal.fire({
+        icon: "warning",
+        iconColor: "#2236D6",
+        title: "¿Esta seguro de eliminar la licencia?",
+        showCancelButton: true,
+        background: "#FFBF18",
+        color: "#ffff",
+        padding: "5em",
+        confirmButtonColor: "#2236D6",
+        cancelButtonColor: "#6272EE",
+        confirmButtonText: "confirmar",
+        cancelButtonText: "rechazar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          resetLicencia(values);
+          Swal.fire({
+            icon: "success",
+            text: "registro de licencia actualizado",
+            timer: 1000,
+            timerProgressBar: true,
+            background: "#FFBF18",
+            color: "#ffff",
+            showConfirmButton: false,
+            padding: "3em",
+          });
+          navigate("/");
+        }
+      });
     } catch (err) {
       console.log(err);
     }
@@ -40,19 +81,31 @@ const Home = () => {
           {currentPosts?.map((t) => (
             <li
               key={t.id}
-              className="grid grid-cols-4 justify-items-center py-5"
+              className="grid grid-cols-5 justify-items-center py-5"
             >
-              <p>
+              <p className="py-2">
                 {t.name} {t.lastName}
               </p>
 
-              <p>{t.rut}</p>
+              <p className="py-2">{t.rut}</p>
 
-              <p>
+              <p className="py-2">
                 Fecha de inicio: {dayjs(t.inicioLicencia).format("D-M-YYYY")}
               </p>
 
-              <p>Fecha término: {dayjs(t.finLicencia).format("D-M-YYYY")}</p>
+              <p className="py-2">
+                Fecha término: {dayjs(t.finLicencia).format("D-M-YYYY")}
+              </p>
+
+              {dayjs().format("D-M-YYYY") ===
+              dayjs(t.finLicencia).format("D-M-YYYY") ? (
+                <button
+                  className="rounded-lg bg-secondary-dark p-2 text-white"
+                  onClick={() => resetLicenciaFromService({ rut: t.rut })}
+                >
+                  borrar licencia
+                </button>
+              ) : null}
             </li>
           ))}
         </ul>
