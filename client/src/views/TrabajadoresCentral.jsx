@@ -56,7 +56,7 @@ const TrabajadoresCentral = () => {
 
   if (searchInput.length > 0) {
     trabajadores.filter((trabajador) => {
-      return trabajador.name.match(searchInput);
+      return trabajador.name.match(searchInput)
     });
   }
 
@@ -82,7 +82,7 @@ const TrabajadoresCentral = () => {
           <div>
             <input
               type="search"
-              placeholder="Buscar trabajador"
+              placeholder="nombre trabajador"
               onChange={handleChange}
               value={searchInput}
               className=" rounded-md px-2 py-1 placeholder:text-sm placeholder:italic"
@@ -115,7 +115,7 @@ const TrabajadoresCentral = () => {
                     {t.name} {t.lastName}
                   </td>
                   <td className="border border-white">{t.rut}</td>
-                  <td className="border border-white flex justify-around">
+                  <td className="flex justify-around border border-white">
                     <button
                       className="rounded-lg bg-secondary-light px-5 py-1 text-white"
                       onClick={() => navigate(`/editar-trabajador/${t.rut}`)}
