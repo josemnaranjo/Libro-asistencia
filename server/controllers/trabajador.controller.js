@@ -125,65 +125,6 @@ export const getAllTrabajadoresOfAJornada = async (req, res) => {
   }
 };
 
-export const getInformeMes = async (req, res) => {
-  try {
-    const { dateStart, mes, dateFinish } = req.body;
-    let nombreArchivo = "Informe_de_Asistencias" + "_" + mes;
-
-    const ws = wb.addWorksheet("Informe de asistencia" + "_" + mes);
-
-    ws.cell(1, 1).string("Fecha").style(colEstilo);
-    ws.cell(1, 2).string("Hora Inicio").style(colEstilo);
-    ws.cell(1, 3).string("Hora Termino").style(colEstilo);
-    ws.cell(1, 4).string("Nombre").style(colEstilo);
-    ws.cell(1, 5).string("Apellido").style(colEstilo);
-    ws.cell(1, 6).string("Rut").style(colEstilo);
-
-    const mesInfo = await Jornada.findAll({
-      where: {
-        date: {
-          [Op.between]: [dateStart, dateFinish],
-        },
-      },
-      order: [["trabajadorId", "ASC"]],
-      include: [
-        {
-          model: Trabajador,
-          paranoid: false,
-        },
-      ],
-      paranoid: false,
-    });
-
-    let cualFila = 2;
-    mesInfo.forEach((datoActual) => {
-      ws.cell(cualFila, 1).string(datoActual.date).style(contenidoEstilo);
-      ws.cell(cualFila, 2).string(datoActual.horaInicio).style(contenidoEstilo);
-      ws.cell(cualFila, 3)
-        .string(datoActual.horaTermino)
-        .style(contenidoEstilo);
-      ws.cell(cualFila, 4)
-        .string(datoActual.Trabajador.name)
-        .style(contenidoEstilo);
-      ws.cell(cualFila, 5)
-        .string(datoActual.Trabajador.lastName)
-        .style(contenidoEstilo);
-      ws.cell(cualFila, 6)
-        .string(datoActual.Trabajador.rut)
-        .style(contenidoEstilo);
-      cualFila++;
-    });
-
-    const pathExcel = path.join(__dirname, nombreArchivo + ".xlsx");
-
-    wb.write(nombreArchivo + ".xlsx", res);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Algo salió mal al obtener la información", err });
-  }
-};
-
 export const updateLicencia = async (req, res) => {
   try {
     const { inicioLicencia, finLicencia } = req.body;
@@ -208,7 +149,7 @@ export const resetLicencia = async (req, res) => {
   try {
     const { rut } = req.body;
     await Trabajador.update(
-      { inicioLicencia: null, finLicencia: null, licencia:false },
+      { inicioLicencia: null, finLicencia: null, licencia: false },
       { where: { rut: rut } }
     );
     res.json({ message: "Licencia actualizada" });
@@ -257,6 +198,73 @@ export const getInformeMesToVisual = async (req, res) => {
     });
 
     res.json(mesInfo);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: "Algo salió mal al obtener la información", err });
+  }
+};
+
+export const getInformeMes = async (req, res) => {
+  try {
+    const { dateStart, mes, dateFinish } = req.body;
+    let nombreArchivo = "Informe_de_Asistencias" + "_" + mes;
+
+    const ws = wb.addWorksheet("Informe de asistencia" + "_" + mes);
+
+    ws.cell(1, 1).string("Fecha").style(colEstilo);
+    ws.cell(1, 2).string("Hora Inicio").style(colEstilo);
+    ws.cell(1, 3).string("Hora Termino").style(colEstilo);
+    ws.cell(1, 4).string("Nombre").style(colEstilo);
+    ws.cell(1, 5).string("Apellido").style(colEstilo);
+    ws.cell(1, 6).string("Rut").style(colEstilo);
+    ws.cell(1, 7).string("Inicio Licencia").style(colEstilo);
+    ws.cell(1, 8).string("Fin Licencia").style(colEstilo);
+
+    const mesInfo = await Jornada.findAll({
+      where: {
+        date: {
+          [Op.between]: [dateStart, dateFinish],
+        },
+      },
+      order: [["trabajadorId", "ASC"]],
+      include: [
+        {
+          model: Trabajador,
+          paranoid: false,
+        },
+      ],
+      paranoid: false,
+    });
+
+    let cualFila = 2;
+    mesInfo.forEach((datoActual) => {
+      ws.cell(cualFila, 1).string(datoActual.date).style(contenidoEstilo);
+      ws.cell(cualFila, 2).string(datoActual.horaInicio).style(contenidoEstilo);
+      ws.cell(cualFila, 3)
+        .string(datoActual.horaTermino)
+        .style(contenidoEstilo);
+      ws.cell(cualFila, 4)
+        .string(datoActual.Trabajador.name)
+        .style(contenidoEstilo);
+      ws.cell(cualFila, 5)
+        .string(datoActual.Trabajador.lastName)
+        .style(contenidoEstilo);
+      ws.cell(cualFila, 6)
+        .string(datoActual.Trabajador.rut)
+        .style(contenidoEstilo);
+      ws.cell(cualFila, 7)
+        .string(datoActual.Trabajador.inicioLicencia)
+        .style(contenidoEstilo);
+      ws.cell(cualFila, 8)
+        .string(datoActual.Trabajador.finLicencia)
+        .style(contenidoEstilo);
+      cualFila++;
+    });
+
+    const pathExcel = path.join(__dirname, nombreArchivo + ".xlsx");
+
+    wb.write(nombreArchivo + ".xlsx", res);
   } catch (err) {
     res
       .status(500)
