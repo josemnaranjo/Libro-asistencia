@@ -100,7 +100,46 @@ const TrabajadoresCentral = () => {
 
         {/* div inferior */}
         <div className="mt-10 max-h-full">
-          <ul>
+          <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
+            <thead className="bg-primary-dark text-white">
+              <tr>
+                <th className="px-3">Nombre</th>
+                <th className="px-3">Rut</th>
+                <th className="px-3">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentPosts?.map((t) => (
+                <tr key={t.rut}>
+                  <td className="border border-white">
+                    {t.name} {t.lastName}
+                  </td>
+                  <td className="border border-white">{t.rut}</td>
+                  <td className="border border-white flex justify-around">
+                    <button
+                      className="rounded-lg bg-secondary-light px-5 py-1 text-white"
+                      onClick={() => navigate(`/editar-trabajador/${t.rut}`)}
+                    >
+                      editar
+                    </button>
+                    <button
+                      className="rounded-lg bg-primary-dark px-5 py-1 text-white"
+                      onClick={() => deleteTrabajador(t.rut)}
+                    >
+                      borrar
+                    </button>
+                    <button
+                      className="rounded-lg bg-secondary-dark px-5 py-1 text-white"
+                      onClick={() => navigate(`/licencia/${t.rut}`)}
+                    >
+                      licencia
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* <ul>
             {currentPosts?.map((t) => (
               <li key={t.id} className="grid grid-cols-5 gap-x-36 py-1">
                 <p>
@@ -127,14 +166,20 @@ const TrabajadoresCentral = () => {
                 </button>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
+
+        {/* boton de pagina */}
         <nav>
           <ul className="flex justify-center gap-3 py-3 ">
             {pageNumbers.map((n) => (
               <li key={n}>
                 <button
-                  className={currentPage === n ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white" : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"}
+                  className={
+                    currentPage === n
+                      ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white"
+                      : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"
+                  }
                   onClick={() => paginate(n)}
                 >
                   {n}
