@@ -75,38 +75,43 @@ const Home = () => {
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <h1 className="text-center text-2xl">Trabajadores con licencia</h1>
-        <ul className="py-5">
-          {currentPosts?.map((t) => (
-            <li
-              key={t.id}
-              className="grid grid-cols-5 justify-items-center py-5"
-            >
-              <p className="py-2">
-                {t.name} {t.lastName}
-              </p>
+        {/* tabla */}
+        <table className="mx-auto w-full table-auto border-separate border-2 border-white text-center mt-4 ">
+          <thead className="bg-primary-dark text-white">
+            <tr>
+              <th className="px-3">Nombre</th>
+              <th className="px-3">Rut</th>
+              <th className="px-3">Inicio de licencia</th>
+              <th className="px-3">Término de licencia</th>
+              <th className="px-3">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentPosts?.map((t) => (
+              <tr key={t.rut}>
+                <td>
+                  {t.name} {t.lastName}
+                </td>
+                <td>{t.rut}</td>
+                <td>{dayjs(t.inicioLicencia).format("D-M-YYYY")}</td>
+                <td>{dayjs(t.finLicencia).format("D-M-YYYY")}</td>
+                {dayjs().format("D-M-YYYY") >=
+                dayjs(t.finLicencia).format("D-M-YYYY") ? (
+                  <td className="py-1">
+                    <button
+                      className="rounded-lg bg-secondary-dark px-1.5 py-0.5 text-white"
+                      onClick={() => resetLicenciaFromService({ rut: t.rut })}
+                    >
+                      borrar licencia
+                    </button>
+                  </td>
+                ) : null}
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-              <p className="py-2">{t.rut}</p>
-
-              <p className="py-2">
-                Fecha de inicio: {dayjs(t.inicioLicencia).format("D-M-YYYY")}
-              </p>
-
-              <p className="py-2">
-                Fecha término: {dayjs(t.finLicencia).format("D-M-YYYY")}
-              </p>
-
-              {dayjs().format("D-M-YYYY") >=
-              dayjs(t.finLicencia).format("D-M-YYYY") ? (
-                <button
-                  className="rounded-lg bg-secondary-dark p-2 text-white"
-                  onClick={() => resetLicenciaFromService({ rut: t.rut })}
-                >
-                  borrar licencia
-                </button>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+        {/* boton de pagina */}
         <nav>
           <ul className="flex justify-center gap-3 py-3 ">
             {pageNumbers === 1
