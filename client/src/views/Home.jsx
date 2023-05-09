@@ -95,7 +95,7 @@ const Home = () => {
                 Fecha término: {dayjs(t.finLicencia).format("D-M-YYYY")}
               </p>
 
-              {dayjs().format("D-M-YYYY") ===
+              {dayjs().format("D-M-YYYY") >=
               dayjs(t.finLicencia).format("D-M-YYYY") ? (
                 <button
                   className="rounded-lg bg-secondary-dark p-2 text-white"
