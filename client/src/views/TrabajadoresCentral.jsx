@@ -97,8 +97,9 @@ const TrabajadoresCentral = () => {
             nuevo trabajador
           </button>
         </div>
-
         {/* div inferior */}
+
+        {/* tabla */}
         <div className="mt-10 max-h-full">
           <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
             <thead className="bg-primary-dark text-white">

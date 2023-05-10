@@ -17,7 +17,6 @@ const RegistroAusentes = () => {
     try {
       const information = await getAllTrabajadoresOfAJornada(date);
       setTrabajadorData(information.data.jornadaInfo);
-      console.log(information.data.jornadaInfo);
     } catch (err) {
       console.log(err);
     }
@@ -80,38 +79,47 @@ const RegistroAusentes = () => {
         <h1 className="text-center text-2xl">
           Registro de ausentes : {dateFormated}
         </h1>
-        <ul className="py-5">
-          {currentPosts?.map((t, i) => (
-            <li
-              key={t.id}
-              className="grid grid-cols-5 justify-items-center py-2"
-            >
-              <p>
-                Nombre: {t.Trabajador.name} {t.Trabajador.lastName}
-              </p>
-              <p>Rut: {t.Trabajador.rut}</p>
-              <p>Hora Inicio: {t.horaInicio}</p>
-              <p>Hora Termino: {t.horaTermino}</p>
-              <button
-                className={
-                  disableButtons.includes(t.Trabajador.rut) ||
-                  t.ausente
-                    ? "w-24 cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white py-1"
-                    : "w-24 rounded-lg bg-primary-dark py-1 text-white"
-                }
-                onClick={() => {
-                  registroDeAusentesFromService({ rut: t.Trabajador.rut });
-                }}
-                disabled={
-                  disableButtons.includes(t.Trabajador.rut) ||
-                  t.ausente
-                }
-              >
-                ausente
-              </button>
-            </li>
-          ))}
-        </ul>
+        <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
+          <thead className="bg-primary-dark text-white">
+            <tr>
+              <th className="px-3">Nombre</th>
+              <th className="px-3">Rut</th>
+              <th className="px-3">Hora inicio</th>
+              <th className="px-3">Hora termino</th>
+              <th className="px-3">indicar ausencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentPosts?.map((t, i) => (
+              <tr key={t.rut}>
+                <td className="border border-white">
+                  {t.Trabajador.name}
+                  {t.Trabajador.lastName}
+                </td>
+                <td className="border border-white">{t.Trabajador.rut}</td>
+                <td className="border border-white">{t.horaInicio}</td>
+                <td className="border border-white">{t.horaTermino}</td>
+                <td className="border border-white">
+                  <button
+                    className={
+                      disableButtons.includes(t.Trabajador.rut) || t.ausente
+                        ? "w-24 cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white py-1"
+                        : "w-24 rounded-lg bg-primary-dark py-1 text-white"
+                    }
+                    onClick={() => {
+                      registroDeAusentesFromService({ rut: t.Trabajador.rut });
+                    }}
+                    disabled={
+                      disableButtons.includes(t.Trabajador.rut) || t.ausente
+                    }
+                  >
+                    ausente
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <nav>
           <ul className="flex justify-center gap-3 py-3 ">
             {pageNumbers.map((n) => (

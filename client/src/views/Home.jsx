@@ -78,7 +78,7 @@ const Home = () => {
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <h1 className="text-center text-2xl">Trabajadores con licencia</h1>
         {/* tabla */}
-        <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center ">
+        <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
           <thead className="bg-primary-dark text-white">
             <tr>
               <th className="px-3">Nombre</th>
