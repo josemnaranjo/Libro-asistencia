@@ -17,6 +17,7 @@ const RegistroAusentes = () => {
     try {
       const information = await getAllTrabajadoresOfAJornada(date);
       setTrabajadorData(information.data.jornadaInfo);
+      console.log(information.data.jornadaInfo);
     } catch (err) {
       console.log(err);
     }
@@ -49,7 +50,7 @@ const RegistroAusentes = () => {
             showConfirmButton: false,
             padding: "3em",
           });
-          handleDisableButtonsClick(values.rut)
+          handleDisableButtonsClick(values.rut);
         }
       });
     } catch (err) {
@@ -76,7 +77,9 @@ const RegistroAusentes = () => {
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
-        <h1 className="text-center text-2xl">Registro de ausentes : {dateFormated}</h1>
+        <h1 className="text-center text-2xl">
+          Registro de ausentes : {dateFormated}
+        </h1>
         <ul className="py-5">
           {currentPosts?.map((t, i) => (
             <li
@@ -91,14 +94,18 @@ const RegistroAusentes = () => {
               <p>Hora Termino: {t.horaTermino}</p>
               <button
                 className={
-                  disableButtons.includes(t.Trabajador.rut)
+                  disableButtons.includes(t.Trabajador.rut) ||
+                  t.ausente
                     ? "w-24 cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white py-1"
                     : "w-24 rounded-lg bg-primary-dark py-1 text-white"
                 }
                 onClick={() => {
                   registroDeAusentesFromService({ rut: t.Trabajador.rut });
                 }}
-                disabled={disableButtons.includes(t.Trabajador.rut)}
+                disabled={
+                  disableButtons.includes(t.Trabajador.rut) ||
+                  t.ausente
+                }
               >
                 ausente
               </button>
@@ -110,7 +117,11 @@ const RegistroAusentes = () => {
             {pageNumbers.map((n) => (
               <li key={n}>
                 <button
-                  className={currentPage === n ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white" : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"}
+                  className={
+                    currentPage === n
+                      ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white"
+                      : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"
+                  }
                   onClick={() => paginate(n)}
                 >
                   {n}
