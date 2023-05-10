@@ -56,7 +56,7 @@ const TrabajadoresCentral = () => {
 
   if (searchInput.length > 0) {
     trabajadores.filter((trabajador) => {
-      return trabajador.name.match(searchInput)
+      return trabajador.name.match(searchInput);
     });
   }
 

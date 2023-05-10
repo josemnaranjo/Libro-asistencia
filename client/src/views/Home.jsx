@@ -12,6 +12,8 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(5);
   const navigate = useNavigate();
+  const now = dayjs();
+  
 
   const getTrabajadoresWithLicenciaFromService = async () => {
     try {
@@ -95,8 +97,8 @@ const Home = () => {
                 <td>{t.rut}</td>
                 <td>{dayjs(t.inicioLicencia).format("D-M-YYYY")}</td>
                 <td>{dayjs(t.finLicencia).format("D-M-YYYY")}</td>
-                {dayjs().format("D-M-YYYY") >=
-                dayjs(t.finLicencia).format("D-M-YYYY") ? (
+                {now >=
+                dayjs(t.finLicencia)? (
                   <td className="py-1">
                     <button
                       className="rounded-lg bg-secondary-dark px-1.5 py-0.5 text-white"
