@@ -39,8 +39,7 @@ const Licencias = () => {
                       "D-M-YYYY"
                     )}</p> `,
         showCancelButton: true,
-        background: "#FFBF18",
-        color: "#ffff",
+        background: "#ffff",
         padding: "5em",
         confirmButtonColor: "#2236D6",
         cancelButtonColor: "#6272EE",
@@ -54,8 +53,7 @@ const Licencias = () => {
             text: "registro de licencia actualizado",
             timer: 2000,
             timerProgressBar: true,
-            background: "#FFBF18",
-            color: "#ffff",
+            background: "#ffff",
             showConfirmButton: false,
             padding: "3em",
           });
