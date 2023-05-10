@@ -13,7 +13,6 @@ const Home = () => {
   const [postPerPage] = useState(5);
   const navigate = useNavigate();
   const now = dayjs();
-  
 
   const getTrabajadoresWithLicenciaFromService = async () => {
     try {
@@ -91,15 +90,18 @@ const Home = () => {
           <tbody>
             {currentPosts?.map((t) => (
               <tr key={t.rut}>
-                <td>
+                <td className="border border-white">
                   {t.name} {t.lastName}
                 </td>
-                <td>{t.rut}</td>
-                <td>{dayjs(t.inicioLicencia).format("D-M-YYYY")}</td>
-                <td>{dayjs(t.finLicencia).format("D-M-YYYY")}</td>
-                {now >=
-                dayjs(t.finLicencia)? (
-                  <td className="py-1">
+                <td className="border border-white">{t.rut}</td>
+                <td className="border border-white">
+                  {dayjs(t.inicioLicencia).format("D-M-YYYY")}
+                </td>
+                <td className="border border-white">
+                  {dayjs(t.finLicencia).format("D-M-YYYY")}
+                </td>
+                {now >= dayjs(t.finLicencia) ? (
+                  <td className="border border-white py-1">
                     <button
                       className="rounded-lg bg-secondary-dark px-1.5 py-0.5 text-white"
                       onClick={() => resetLicenciaFromService({ rut: t.rut })}
