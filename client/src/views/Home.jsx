@@ -115,45 +115,6 @@ const Home = () => {
         <h1 className="text-center text-2xl">Trabajadores con licencia</h1>
 
         <Table columns={columns} data={data} />
-
-        {/* tabla */}
-        {/* <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
-          <thead className="bg-primary-dark text-white">
-            <tr>
-              <th className="px-3">Nombre</th>
-              <th className="px-3">Rut</th>
-              <th className="px-3">Inicio de licencia</th>
-              <th className="px-3">Término de licencia</th>
-              <th className="px-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentPosts?.map((t) => (
-              <tr key={t.rut}>
-                <td className="border border-white">
-                  {t.name} {t.lastName}
-                </td>
-                <td className="border border-white">{t.rut}</td>
-                <td className="border border-white">
-                  {dayjs(t.inicioLicencia).format("D-M-YYYY")}
-                </td>
-                <td className="border border-white">
-                  {dayjs(t.finLicencia).format("D-M-YYYY")}
-                </td>
-                {now >= dayjs(t.finLicencia) ? (
-                  <td className="border border-white py-1">
-                    <button
-                      className="rounded-lg bg-secondary-dark px-1.5 py-0.5 text-white"
-                      onClick={() => resetLicenciaFromService({ rut: t.rut })}
-                    >
-                      borrar licencia
-                    </button>
-                  </td>
-                ) : null}
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
       </div>
     </div>
   );
