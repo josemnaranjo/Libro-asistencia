@@ -10,17 +10,14 @@ import Table from "../components/Table.jsx";
 
 const Home = () => {
   const [trabajadores, setTrabajadores] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(5);
   const navigate = useNavigate();
   const now = dayjs();
-
 
   const getTrabajadoresWithLicenciaFromService = async () => {
     try {
       const information = await getTrabajadoresWithLicencia();
       setTrabajadores(information.data);
-      console.log(information.data)
+      console.log(information.data);
     } catch (err) {
       console.log(err);
     }
@@ -63,43 +60,54 @@ const Home = () => {
     getTrabajadoresWithLicenciaFromService();
   }, []);
 
+  const data = trabajadores.map((t) => ({
+    ...t,
+    inicioLicencia: dayjs(t.inicioLicencia).format("D-M-YYYY"),
+    finLicencia: dayjs(t.finLicencia).format("D-M-YYYY"),
+    acciones: (
+      <button
+        className={
+          now >= dayjs(t.finLicencia)
+            ? "rounded-lg bg-secondary-dark px-1.5 py-0.5 text-white"
+            : "cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white px-1.5 py-0.5"
+        }
+        disabled={now >= dayjs(t.finLicencia) ? false : true}
+        onClick={() => resetLicenciaFromService({ rut: t.rut })}
+      >
+        borrar licencia
+      </button>
+    ),
+  }));
 
-  const data = trabajadores.map(t=>({...t,inicioLicencia:dayjs(t.inicioLicencia).format("D-M-YYYY"),finLicencia:dayjs(t.finLicencia).format("D-M-YYYY")}));
-
-  const columns = useMemo(() => [
-    {
-      Header:"Nombre",
-      accessor:"name"
-    },
-    {
-        Header:"Apellido",
-        accessor:"lastName"
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Nombre",
+        accessor: "name",
       },
       {
-        Header:"Rut",
-        accessor:"rut"
+        Header: "Apellido",
+        accessor: "lastName",
       },
       {
-        Header:"Inicio Licencia",
-        accessor:"inicioLicencia"
+        Header: "Rut",
+        accessor: "rut",
       },
       {
-        Header:"Término de licencia",
-        accessor:"finLicencia"
+        Header: "Inicio Licencia",
+        accessor: "inicioLicencia",
       },
-  ], []);
-
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
-
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(trabajadores.length / postPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
+      {
+        Header: "Término de licencia",
+        accessor: "finLicencia",
+      },
+      {
+        Header: "Acciones",
+        accessor: "acciones",
+      },
+    ],
+    []
+  );
 
   return (
     <div className="h-5/6 px-6 pt-12">
@@ -146,24 +154,6 @@ const Home = () => {
             ))}
           </tbody>
         </table> */}
-
-        {/* boton de pagina */}
-        {/* <nav>
-          <ul className="flex justify-center gap-3 py-3 ">
-            {pageNumbers === 1
-              ? null
-              : pageNumbers.map((n) => (
-                  <li key={n}>
-                    <button
-                      className="rounded-full bg-primary-middle px-2 text-white ring-1 ring-white "
-                      onClick={() => paginate(n)}
-                    >
-                      {n}
-                    </button>
-                  </li>
-                ))}
-          </ul>
-        </nav> */}
       </div>
     </div>
   );

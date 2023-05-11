@@ -47,7 +47,7 @@ const Table = ({ columns, data }) => {
                 {row.cells.map((cell) => {
                   return (
                     <td
-                      className="border border-white"
+                      className="border border-white py-2"
                       {...cell.getCellProps()}
                     >
                       {cell.render("Cell")}
@@ -58,6 +58,7 @@ const Table = ({ columns, data }) => {
             );
           })}
         </tbody>
+        {/* paginador */}
         <div className="container p-1 ">
           <button
             className="rounded-full bg-primary-middle px-2 text-white ring-1 ring-white "
