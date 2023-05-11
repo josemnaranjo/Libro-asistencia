@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getTrabajadoresWithLicencia,
@@ -6,6 +6,7 @@ import {
 } from "../services/trabajador.services.js";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
+import Table from "../components/Table.jsx";
 
 const Home = () => {
   const [trabajadores, setTrabajadores] = useState([]);
@@ -14,10 +15,12 @@ const Home = () => {
   const navigate = useNavigate();
   const now = dayjs();
 
+
   const getTrabajadoresWithLicenciaFromService = async () => {
     try {
       const information = await getTrabajadoresWithLicencia();
       setTrabajadores(information.data);
+      console.log(information.data)
     } catch (err) {
       console.log(err);
     }
@@ -60,6 +63,32 @@ const Home = () => {
     getTrabajadoresWithLicenciaFromService();
   }, []);
 
+
+  const data = trabajadores.map(t=>({...t,inicioLicencia:dayjs(t.inicioLicencia).format("D-M-YYYY"),finLicencia:dayjs(t.finLicencia).format("D-M-YYYY")}));
+
+  const columns = useMemo(() => [
+    {
+      Header:"Nombre",
+      accessor:"name"
+    },
+    {
+        Header:"Apellido",
+        accessor:"lastName"
+      },
+      {
+        Header:"Rut",
+        accessor:"rut"
+      },
+      {
+        Header:"Inicio Licencia",
+        accessor:"inicioLicencia"
+      },
+      {
+        Header:"Término de licencia",
+        accessor:"finLicencia"
+      },
+  ], []);
+
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
@@ -76,8 +105,11 @@ const Home = () => {
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <h1 className="text-center text-2xl">Trabajadores con licencia</h1>
+
+        <Table columns={columns} data={data} />
+
         {/* tabla */}
-        <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
+        {/* <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
           <thead className="bg-primary-dark text-white">
             <tr>
               <th className="px-3">Nombre</th>
@@ -113,7 +145,7 @@ const Home = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
 
         {/* boton de pagina */}
         <nav>
