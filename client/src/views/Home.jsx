@@ -148,7 +148,7 @@ const Home = () => {
         </table> */}
 
         {/* boton de pagina */}
-        <nav>
+        {/* <nav>
           <ul className="flex justify-center gap-3 py-3 ">
             {pageNumbers === 1
               ? null
@@ -163,7 +163,7 @@ const Home = () => {
                   </li>
                 ))}
           </ul>
-        </nav>
+        </nav> */}
       </div>
     </div>
   );
