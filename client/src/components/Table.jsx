@@ -18,7 +18,7 @@ const Table = ({ columns, data }) => {
     setPageSize,
     state: { pageIndex, pageSize },
   } = useTable(
-    { columns, data, initialState: { pageIndex: 0 } },
+    { columns, data, initialState: { pageIndex: 0, pageSize:5 } },
     usePagination
   );
 
