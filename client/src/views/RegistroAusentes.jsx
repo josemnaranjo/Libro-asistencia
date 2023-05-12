@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { getAllTrabajadoresOfAJornada } from "../services/trabajador.services.js";
 import { registroDeAusentes } from "../services/jornada.services.js";
 import Swal from "sweetalert2";
+import Table from "../components/Table.jsx";
 
 const RegistroAusentes = () => {
   const { date } = useParams();
   const dateFormated = dayjs(date).format("D-M-YYYY");
   const [trabajadorData, setTrabajadorData] = useState([]);
   const [disableButtons, setDisabledButtons] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(9);
 
   const getAllTrabajadoresOfAJornadaFromService = async () => {
     try {
@@ -61,17 +60,57 @@ const RegistroAusentes = () => {
     getAllTrabajadoresOfAJornadaFromService();
   }, []);
 
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = trabajadorData.slice(indexOfFirstPost, indexOfLastPost);
+  const colums = useMemo(
+    () => [
+      {
+        Header: "Nombre",
+        accessor: "Trabajador.name",
+      },
+      {
+        Header: "Apellido",
+        accessor: "Trabajador.lastName",
+      },
+      {
+        Header: "Rut",
+        accessor: "Trabajador.rut",
+      },
+      {
+        Header: "Hora inicio",
+        accessor: "horaInicio",
+      },
+      {
+        Header: "Hora termmino",
+        accessor: "horaTermino",
+      },
+      {
+        Header: "Acciones",
+        accessor: "acciones",
+      },
+    ],
+    []
+  );
 
-  const pageNumbers = [];
+  const data = trabajadorData.map((t) => ({
+    ...t,
+    acciones: (
+      <div>
+        <button
+          className={
+            disableButtons.includes(t.Trabajador.rut) || t.ausente
+              ? "w-24 cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white py-1"
+              : "w-24 rounded-lg bg-primary-dark py-1 text-white"
+          }
+          onClick={() => {
+            registroDeAusentesFromService({ rut: t.Trabajador.rut });
+          }}
+          disabled={disableButtons.includes(t.Trabajador.rut) || t.ausente}
+        >
+          ausente
+        </button>
+      </div>
+    ),
+  }));
 
-  for (let i = 1; i <= Math.ceil(trabajadorData.length / postPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 
   return (
     <div className="h-5/6 px-6 pt-12">
@@ -79,65 +118,7 @@ const RegistroAusentes = () => {
         <h1 className="text-center text-2xl">
           Registro de ausentes : {dateFormated}
         </h1>
-        <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
-          <thead className="bg-primary-dark text-white">
-            <tr>
-              <th className="px-3">Nombre</th>
-              <th className="px-3">Rut</th>
-              <th className="px-3">Hora inicio</th>
-              <th className="px-3">Hora termino</th>
-              <th className="px-3">indicar ausencia</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentPosts?.map((t, i) => (
-              <tr key={t.rut}>
-                <td className="border border-white">
-                  {t.Trabajador.name}
-                  {t.Trabajador.lastName}
-                </td>
-                <td className="border border-white">{t.Trabajador.rut}</td>
-                <td className="border border-white">{t.horaInicio}</td>
-                <td className="border border-white">{t.horaTermino}</td>
-                <td className="border border-white">
-                  <button
-                    className={
-                      disableButtons.includes(t.Trabajador.rut) || t.ausente
-                        ? "w-24 cursor-not-allowed rounded-lg border-2 border-orange-500 bg-white py-1"
-                        : "w-24 rounded-lg bg-primary-dark py-1 text-white"
-                    }
-                    onClick={() => {
-                      registroDeAusentesFromService({ rut: t.Trabajador.rut });
-                    }}
-                    disabled={
-                      disableButtons.includes(t.Trabajador.rut) || t.ausente
-                    }
-                  >
-                    ausente
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <nav>
-          <ul className="flex justify-center gap-3 py-3 ">
-            {pageNumbers.map((n) => (
-              <li key={n}>
-                <button
-                  className={
-                    currentPage === n
-                      ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white"
-                      : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"
-                  }
-                  onClick={() => paginate(n)}
-                >
-                  {n}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <Table columns={colums} data={data}/>
       </div>
     </div>
   );
