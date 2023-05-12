@@ -130,6 +130,10 @@ const Informe = () => {
       accessor: "Trabajador.rut",
     },
     {
+        Header:"Fecha",
+        accessor:"date"
+    },
+    {
       Header: "Hora inicio",
       accessor: "horaInicio",
     },
