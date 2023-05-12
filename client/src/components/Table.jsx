@@ -100,7 +100,7 @@ const Table = ({ columns, data }) => {
               setPageSize(Number(e.target.value));
             }}
           >
-            {[5, 10, 20].map((pageSize) => (
+            {[5,10,15].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
                 Mostrar {pageSize}
               </option>

@@ -1,14 +1,13 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useMemo } from "react";
 import {
   getAllTrabajadores,
   deleteOneTrabajador,
 } from "../services/trabajador.services.js";
 import { useNavigate } from "react-router-dom";
+import Table from "../components/Table.jsx";
 
 const TrabajadoresCentral = () => {
   const [trabajadores, setTrabajadores] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(9);
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
@@ -60,18 +59,56 @@ const TrabajadoresCentral = () => {
     });
   }
 
-  //paginación
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
+  //   informarcion para tabla
 
-  const pageNumbers = [];
+  const data = trabajadores.map((t) => ({
+    ...t,
+    acciones: (
+      <div className="flex justify-around">
+        <button
+          className="rounded-lg bg-secondary-light px-5 py-1 text-white"
+          onClick={() => navigate(`/editar-trabajador/${t.rut}`)}
+        >
+          editar
+        </button>
+        <button
+          className="rounded-lg bg-primary-dark px-5 py-1 text-white"
+          onClick={() => deleteTrabajador(t.rut)}
+        >
+          borrar
+        </button>
+        <button
+          className="rounded-lg bg-secondary-dark px-5 py-1 text-white"
+          onClick={() => navigate(`/licencia/${t.rut}`)}
+        >
+          licencia
+        </button>
+      </div>
+    ),
+  }));
 
-  for (let i = 1; i <= Math.ceil(trabajadores.length / postPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const colums = useMemo(
+    () => [
+      {
+        Header: "Nombre",
+        accessor: "name",
+      },
+      {
+        Header: "Apellido",
+        accessor: "lastName",
+      },
+      {
+        Header: "Rut",
+        accessor: "rut",
+      },
+      {
+        Header: "Acciones",
+        accessor: "acciones",
+      },
+    ],
+    []
+  );
 
-  const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 
   return (
     <div className="h-5/6 px-6 pt-12">
@@ -100,95 +137,7 @@ const TrabajadoresCentral = () => {
         {/* div inferior */}
 
         {/* tabla */}
-        <div className="mt-10 max-h-full">
-          <table className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center">
-            <thead className="bg-primary-dark text-white">
-              <tr>
-                <th className="px-3">Nombre</th>
-                <th className="px-3">Rut</th>
-                <th className="px-3">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentPosts?.map((t) => (
-                <tr key={t.rut}>
-                  <td className="border border-white">
-                    {t.name} {t.lastName}
-                  </td>
-                  <td className="border border-white">{t.rut}</td>
-                  <td className="flex justify-around border border-white">
-                    <button
-                      className="rounded-lg bg-secondary-light px-5 py-1 text-white"
-                      onClick={() => navigate(`/editar-trabajador/${t.rut}`)}
-                    >
-                      editar
-                    </button>
-                    <button
-                      className="rounded-lg bg-primary-dark px-5 py-1 text-white"
-                      onClick={() => deleteTrabajador(t.rut)}
-                    >
-                      borrar
-                    </button>
-                    <button
-                      className="rounded-lg bg-secondary-dark px-5 py-1 text-white"
-                      onClick={() => navigate(`/licencia/${t.rut}`)}
-                    >
-                      licencia
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {/* <ul>
-            {currentPosts?.map((t) => (
-              <li key={t.id} className="grid grid-cols-5 gap-x-36 py-1">
-                <p>
-                  {t.name} {t.lastName}
-                </p>
-                <p className="text-center"> {t.rut}</p>
-                <button
-                  className="rounded-lg bg-secondary-light p-1 text-white"
-                  onClick={() => navigate(`/editar-trabajador/${t.rut}`)}
-                >
-                  editar
-                </button>
-                <button
-                  className="rounded-lg bg-primary-dark p-1 text-white"
-                  onClick={() => deleteTrabajador(t.rut)}
-                >
-                  borrar
-                </button>
-                <button
-                  className="rounded-lg bg-secondary-dark p-1 text-white"
-                  onClick={() => navigate(`/licencia/${t.rut}`)}
-                >
-                  licencia
-                </button>
-              </li>
-            ))}
-          </ul> */}
-        </div>
-
-        {/* boton de pagina */}
-        <nav>
-          <ul className="flex justify-center gap-3 py-3 ">
-            {pageNumbers.map((n) => (
-              <li key={n}>
-                <button
-                  className={
-                    currentPage === n
-                      ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white"
-                      : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"
-                  }
-                  onClick={() => paginate(n)}
-                >
-                  {n}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <Table columns={colums} data={data} />
       </div>
     </div>
   );
