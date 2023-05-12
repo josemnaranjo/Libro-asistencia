@@ -16,7 +16,7 @@ const NuevoDia = () => {
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-40">
-        <h1 className="py-10 text-2xl text-center">
+        <h1 className="py-10 text-center text-2xl">
           Ingrese la fecha de hoy para iniciar un nuevo registro
         </h1>
         <div className="grid grid-rows-2 justify-items-center gap-5">
@@ -32,7 +32,7 @@ const NuevoDia = () => {
           </div>
           <Link to={`/registro-entrada/${formatedDay}`}>
             <button
-              className="rounded-lg bg-secondary-dark p-1.5 text-white text-sm"
+              className="rounded-lg bg-secondary-dark p-1.5 text-sm text-white"
               onMouseEnter={() => changeDateFormat(selectedDay)}
             >
               crear nuevo día

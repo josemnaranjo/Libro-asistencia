@@ -5,6 +5,7 @@ import {
   updateTrabajador,
 } from "../services/trabajador.services.js";
 import EditarTrabajadorForm from "../components/EditarTrabajadorForm.jsx";
+import Swal from "sweetalert2";
 
 const EditarTrabajador = () => {
   const { rut } = useParams();
@@ -16,6 +17,13 @@ const EditarTrabajador = () => {
       const res = await getOneTrabajador(rut);
       setTrabajador(res.data[0]);
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar recuperar la información del servidor`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -25,6 +33,13 @@ const EditarTrabajador = () => {
       await updateTrabajador(values, rut);
       navigate("/trabajadores");
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar actualizar la información del trabajador`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };

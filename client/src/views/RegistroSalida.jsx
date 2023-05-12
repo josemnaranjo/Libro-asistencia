@@ -20,6 +20,13 @@ const RegistroDeSalida = () => {
         padding: "3em",
       });
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar actualizar la información`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -40,7 +47,9 @@ const RegistroDeSalida = () => {
         >
           <Form className="py-12">
             <div className="grid grid-rows-2 justify-items-center gap-3">
-              <label htmlFor="rut" className="text-lg">Ingrese su rut</label>
+              <label htmlFor="rut" className="text-lg">
+                Ingrese su rut
+              </label>
               <Field
                 id="rut"
                 type="text"
@@ -52,7 +61,7 @@ const RegistroDeSalida = () => {
 
             <div className="py-9 text-center">
               <button
-                className="rounded-lg bg-secondary-dark p-2.5 text-xs text-white text-sm"
+                className="rounded-lg bg-secondary-dark p-2.5 text-sm text-xs text-white"
                 type="submit"
               >
                 aceptar

@@ -3,6 +3,7 @@ import { getInformeVisualMes } from "../services/trabajador.services.js";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import Table from "../components/Table.jsx";
+import Swal from "sweetalert2";
 
 const Informe = () => {
   const { month } = useParams();
@@ -39,7 +40,6 @@ const Informe = () => {
             dateFinish: `${year}-04-30`,
           });
           setTrabajadores(information4.data);
-          console.log(information4.data);
           break;
         case "5":
           const information5 = await getInformeVisualMes({
@@ -101,6 +101,13 @@ const Informe = () => {
           break;
       }
     } catch (err) {
+        Swal.fire({
+            icon: "error",
+            iconColor: "#2236D6",
+            title: `Ocurrio un error al intentar recuperar la información del servidor`,
+            background: "#ffff",
+            padding: "5em",
+          })
       console.log(err);
     }
   };

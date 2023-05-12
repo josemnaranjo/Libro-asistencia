@@ -18,6 +18,13 @@ const Home = () => {
       const information = await getTrabajadoresWithLicencia();
       setTrabajadores(information.data);
     } catch (err) {
+        Swal.fire({
+            icon: "error",
+            iconColor: "#2236D6",
+            title: `Ocurrio un error al intentar recuperar la información del servidor`,
+            background: "#ffff",
+            padding: "5em",
+          })
       console.log(err);
     }
   };

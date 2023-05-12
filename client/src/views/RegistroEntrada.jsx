@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 const RegistroDeEntrada = () => {
   const { date } = useParams();
   const dateForDisplay = dayjs(date).format("DD-MM-YYYY");
+
   const registroDeEntradaFromService = async (rut) => {
     try {
       await registroDeEntrada(date, rut);
@@ -20,6 +21,13 @@ const RegistroDeEntrada = () => {
         padding: "3em",
       });
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar actualizar la información`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -39,7 +47,9 @@ const RegistroDeEntrada = () => {
         >
           <Form className="py-12">
             <div className="grid grid-rows-2 justify-items-center gap-3">
-              <label htmlFor="rut" className="text-lg">Ingrese su rut</label>
+              <label htmlFor="rut" className="text-lg">
+                Ingrese su rut
+              </label>
               <Field
                 id="rut"
                 type="text"

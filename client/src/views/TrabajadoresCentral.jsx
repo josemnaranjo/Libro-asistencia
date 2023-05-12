@@ -5,6 +5,7 @@ import {
 } from "../services/trabajador.services.js";
 import { useNavigate } from "react-router-dom";
 import Table from "../components/Table.jsx";
+import Swal from "sweetalert2";
 
 const TrabajadoresCentral = () => {
   const [trabajadores, setTrabajadores] = useState([]);
@@ -25,6 +26,13 @@ const TrabajadoresCentral = () => {
         setTrabajadores(res);
       }
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar recuperar la información del servidor`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -108,7 +116,6 @@ const TrabajadoresCentral = () => {
     ],
     []
   );
-
 
   return (
     <div className="h-5/6 px-6 pt-12">

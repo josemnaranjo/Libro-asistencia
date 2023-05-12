@@ -17,6 +17,13 @@ const RegistroAusentes = () => {
       const information = await getAllTrabajadoresOfAJornada(date);
       setTrabajadorData(information.data.jornadaInfo);
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar recuperar la información del servidor`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -52,6 +59,13 @@ const RegistroAusentes = () => {
         }
       });
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar actualizar la información`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -111,14 +125,13 @@ const RegistroAusentes = () => {
     ),
   }));
 
-
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <h1 className="text-center text-2xl">
           Registro de ausentes : {dateFormated}
         </h1>
-        <Table columns={colums} data={data}/>
+        <Table columns={colums} data={data} />
       </div>
     </div>
   );

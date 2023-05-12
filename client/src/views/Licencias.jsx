@@ -20,6 +20,13 @@ const Licencias = () => {
       const res = await getOneTrabajador(rut);
       setTrabajador(res.data[0]);
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar recuperar la información del servidor`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
@@ -61,6 +68,13 @@ const Licencias = () => {
         }
       });
     } catch (err) {
+      Swal.fire({
+        icon: "error",
+        iconColor: "#2236D6",
+        title: `Ocurrio un error al intentar actualizar la información`,
+        background: "#ffff",
+        padding: "5em",
+      });
       console.log(err);
     }
   };
