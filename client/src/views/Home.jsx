@@ -17,7 +17,6 @@ const Home = () => {
     try {
       const information = await getTrabajadoresWithLicencia();
       setTrabajadores(information.data);
-      console.log(information.data);
     } catch (err) {
       console.log(err);
     }

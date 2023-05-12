@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { getInformeVisualMes } from "../services/trabajador.services.js";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import Table from "../components/Table.jsx";
 
 const Informe = () => {
   const { month } = useParams();
   const [trabajadores, setTrabajadores] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(8);
   const year = dayjs().year();
 
   const getInformeVisualMesFromService = async () => {
@@ -110,65 +109,44 @@ const Informe = () => {
     getInformeVisualMesFromService();
   }, []);
 
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = trabajadores.slice(indexOfFirstPost, indexOfLastPost);
+  const data = trabajadores.map((t) => ({
+    ...t,
+    inicioLicencia: dayjs(t.inicioLicencia).format("D-M-YYYY"),
+    finLicencia: dayjs(t.finLicencia).format("D-M-YYYY"),
+    ausente: t.ausente ? "si" : "no"
+  }));
 
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(trabajadores.length / postPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
+  const colums = useMemo(() => [
+    {
+      Header: "Nombre",
+      accessor: "Trabajador.name",
+    },
+    {
+      Header: "Apellido",
+      accessor: "Trabajador.lastName",
+    },
+    {
+      Header: "Rut",
+      accessor: "Trabajador.rut",
+    },
+    {
+      Header: "Hora inicio",
+      accessor: "horaInicio",
+    },
+    {
+      Header: "Hora termmino",
+      accessor: "horaTermino",
+    },
+    {
+      Header: "Ausente",
+      accessor: "ausente",
+    },
+  ]);
 
   return (
     <div className="h-5/6 px-6 pt-12">
       <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
-        <table className="mx-auto w-full table-auto border-separate border-2 border-white text-center ">
-          <thead className="bg-primary-dark text-white">
-            <tr>
-              <th className="px-3">Nombre</th>
-              <th className="px-3">Rut</th>
-              <th className="px-3">Fecha</th>
-              <th className="px-3">Hora Inicio</th>
-              <th className="px-3">Hora Término</th>
-              <th className="px-3">Ausente</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentPosts?.map((t) => (
-              <tr key={t.id}>
-                <td className="border border-white p-3">
-                  {t.Trabajador.name} {t.Trabajador.lastName}
-                </td>
-                <td className="border border-white p-3">{t.Trabajador.rut}</td>
-                <td className="border border-white p-3">
-                  {dayjs(t.date).format("D-M-YYYY")}
-                </td>
-                <td className="border border-white p-3">{t.horaInicio}</td>
-                <td className="border border-white p-3">{t.horaTermino}</td>
-                <td className="border border-white p-3">
-                  {t.ausente ? "si" : "no"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <nav>
-          <ul className="flex justify-center gap-3 py-3 ">
-            {pageNumbers.map((n) => (
-              <li key={n}>
-                <button
-                  className={currentPage === n ? "rounded-full bg-secondary-middle px-2 text-white ring-1 ring-white" : "rounded-full bg-primary-middle px-2 text-white ring-1 ring-white"}
-                  onClick={() => paginate(n)}
-                >
-                  {n}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <Table columns={colums} data={data} />
       </div>
     </div>
   );
