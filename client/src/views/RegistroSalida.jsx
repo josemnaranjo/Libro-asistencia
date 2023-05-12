@@ -61,7 +61,7 @@ const RegistroDeSalida = () => {
 
             <div className="py-9 text-center">
               <button
-                className="rounded-lg bg-secondary-dark p-2.5 text-sm text-xs text-white"
+                className="rounded-lg bg-secondary-dark p-2.5 text-xs text-white"
                 type="submit"
               >
                 aceptar
