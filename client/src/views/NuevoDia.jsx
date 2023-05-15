@@ -14,8 +14,8 @@ const NuevoDia = () => {
   };
 
   return (
-    <div className="h-5/6 px-6 pt-12">
-      <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-40">
+    <div className="flex h-5/6 items-center justify-center px-12">
+      <div className="border-xl h-fit w-full rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-40">
         <h1 className="py-10 text-center text-2xl">
           Ingrese la fecha de hoy para iniciar un nuevo registro
         </h1>
