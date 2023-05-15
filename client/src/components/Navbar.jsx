@@ -17,14 +17,14 @@ const Navbar = () => {
         />
       </Link>
 
-      <div className="mt-12 flex flex-col items-center">
+      <div className="mt-12 text-center">
         <Link to="/nuevo-dia">
           <button className="rounded-lg bg-secondary-dark p-3.5 text-white">
             nuevo dia
           </button>
         </Link>
 
-        <div className="absolute inset-x-0 bottom-0 mb-36 flex flex-col items-center">
+        <div className="absolute inset-x-0 bottom-0 mb-36 flex flex-col">
           <Link to="/trabajadores">
             <button className="rounded-lg bg-secondary-dark p-3.5 text-white">
               trabajadores
@@ -33,7 +33,7 @@ const Navbar = () => {
 
           <Menu>
             <div>
-              <Menu.Button className="mt-5 rounded-lg bg-secondary-dark p-3.5 text-white">
+              <Menu.Button className=" mt-5 rounded-lg bg-secondary-dark p-3.5 text-white">
                 Libro de asistencias
               </Menu.Button>
             </div>
