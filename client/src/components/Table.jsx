@@ -25,7 +25,7 @@ const Table = ({ columns, data }) => {
   return (
     <div>
       <table
-        className="mx-auto mt-4 w-full table-auto border-separate border-2 border-white text-center"
+        className="h-full w-4/5 mx-auto  border-white text-center"
         {...getTableProps()}
       >
         <thead className="bg-primary-dark text-white">
@@ -100,7 +100,7 @@ const Table = ({ columns, data }) => {
               setPageSize(Number(e.target.value));
             }}
           >
-            {[5,10,15].map((pageSize) => (
+            {[5,10].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
                 Mostrar {pageSize}
               </option>
