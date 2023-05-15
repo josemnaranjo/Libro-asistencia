@@ -118,8 +118,8 @@ const TrabajadoresCentral = () => {
   );
 
   return (
-    <div className="h-5/6 px-6 pt-12">
-      <div className="h-fit border-xl rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
+    <div className="h-5/6 flex justify-center items-center px-6 pt-12">
+      <div className="h-fit w-full border-xl rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         {/* div superior */}
         <div className="grid grid-cols-2 justify-items-center gap-48 ">
           {/* buscador */}
