@@ -156,7 +156,7 @@ const Informe = () => {
 
   return (
     <div className="h-5/6 px-6 pt-12">
-      <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
+      <div className="h-fit border-xl rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <Table columns={colums} data={data} />
       </div>
     </div>
