@@ -25,7 +25,7 @@ const Table = ({ columns, data }) => {
   return (
     <div>
       <table
-        className="h-full w-full border-white text-center"
+        className="h-full w-full mt-6 border-white text-center"
         {...getTableProps()}
       >
         <thead className="bg-primary-dark text-white">

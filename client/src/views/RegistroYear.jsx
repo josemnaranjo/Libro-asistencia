@@ -26,8 +26,8 @@ const RegistroYear = () => {
     }
   };
   return (
-    <div className="h-5/6 px-6 pt-12">
-      <div className="border-xl h-5/6 rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
+    <div className="h-5/6 flex justify-center items-center px-12">
+      <div className=" h-fit w-full border-xl rounded-xl bg-gradient-to-r from-slate-100 to-slate-300 px-10 py-10">
         <h1 className="text-center text-2xl">Registro año: {year}</h1>
         {page === 1 ? (
           <PresenteAUno onSubmitProps={getInformeMesFromService} />
