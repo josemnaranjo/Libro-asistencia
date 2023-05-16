@@ -11,13 +11,20 @@ const __dirname = path.dirname(__filename);
 
 export const addTrabajador = async (req, res) => {
   try {
-    const { name, lastName, rut } = req.body;
-    const newTrabajador = await Trabajador.create({
-      name: name,
-      lastName: lastName,
-      rut: rut,
-    });
-    res.json({ message: "Trabajador creado exitosamente", newTrabajador });
+    const { name, lastName, rut, exEmpleado } = req.body;
+    if (exEmpleado === false) {
+      const newTrabajador = await Trabajador.create({
+        name: name,
+        lastName: lastName,
+        rut: rut,
+      });
+      res.json({ message: "Trabajador creado exitosamente", newTrabajador });
+    } else {
+      const restoreTrabajador = await Trabajador.restore({
+        where: { rut: rut },
+      });
+      res.json({ message: "Trabajador creado exitosamente", restoreTrabajador });
+    }
   } catch (err) {
     res
       .status(500)

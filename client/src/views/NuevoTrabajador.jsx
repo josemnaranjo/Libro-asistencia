@@ -45,6 +45,7 @@ const NuevoTrabajador = () => {
               name: "",
               lastName: "",
               rut: "",
+              exEmpleado: false
             }}
             validationSchema={valSchema}
             onSubmit={(values, { resetForm }) => {
@@ -97,6 +98,12 @@ const NuevoTrabajador = () => {
                         <p className="text-red-600">{errors.rut}</p>
                       ) : null}
                       {error ? <p className="text-red-600">{error}</p> : null}
+                    </div>
+
+                    <div className="mt-5">
+                        <label htmlFor="true"> El trabajador es exempleado
+                        <Field type="checkbox" name="exEmpleado" className="ml-2"/>
+                        </label>
                     </div>
                   </div>
 
