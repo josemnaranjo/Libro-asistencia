@@ -118,8 +118,7 @@ const Informe = () => {
 
   const data = trabajadores.map((t) => ({
     ...t,
-    inicioLicencia: dayjs(t.inicioLicencia).format("D-M-YYYY"),
-    finLicencia: dayjs(t.finLicencia).format("D-M-YYYY"),
+    date: dayjs(t.date).format("D-M-YYYY"),
     ausente: t.ausente ? "si" : "no"
   }));
 
