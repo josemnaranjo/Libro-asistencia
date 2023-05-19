@@ -29,7 +29,7 @@ async function main (){
     try{
         await sequelize.sync();
         console.log("Conexión con la base de datos exitosa");
-        app.listen(port, ()=>{
+        app.listen(process.env.PORT || port, ()=>{
             console.log("Escuchando al puerto",port);
         });
     }catch(err){
