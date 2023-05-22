@@ -36,13 +36,7 @@ export const Trabajador = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        msg: "El RUT ya existe en la base de datos"
-      },
-      validate: {
-        is: {
-            args: /^[0-9]{7,8}[-]{0,1}[0-9kK]{1}$/,
-            msg: "El RUT ingresado no es válido"
-        }
+        msg: "El RUT ya existe en la base de datos",
       },
     },
     inicioLicencia: {
