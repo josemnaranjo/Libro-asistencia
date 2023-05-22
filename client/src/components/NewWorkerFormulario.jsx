@@ -2,8 +2,18 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
-
 const NewWorkerFormulario = ({ onSubmitProp }) => {
+  const re = /^[0-9]{7,8}[-]{1}[0-9kK]{1}$/;
+
+const validationRut = (value) => {
+    let error;
+    if(!value){
+        error = "Por favor, ingresar RUT del trabajador"
+    } else if (!re.test(value)){
+        error="Formato de RUT incorrecto"
+    }
+    return error
+}
   const valSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "El nombre del trabajador debe tener más de 3 caracteres")
@@ -12,8 +22,6 @@ const NewWorkerFormulario = ({ onSubmitProp }) => {
     lastName: Yup.string()
       .min(3, "El apellido del trabajador debe tener más de 3 caracteres")
       .required("Por favor, ingresar el apellido del trabajador"),
-
-    rut: Yup.string().required("Por favor, ingresar el rut del trabajador"),
   });
 
   return (
@@ -70,6 +78,7 @@ const NewWorkerFormulario = ({ onSubmitProp }) => {
                     name="rut"
                     className="ml-9 mt-5 w-64 rounded-lg border border-stone-400 bg-white p-1 text-xs"
                     placeholder="XXXXXXXX-X"
+                    validate={validationRut}
                   />
 
                   {errors.rut && touched.rut ? (
