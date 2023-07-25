@@ -1,19 +1,8 @@
 import { Jornada } from "../models/Jornadas.js";
 import { Trabajador } from "../models/Trabajador.js";
-import path from 'path';
-import { fileURLToPath } from 'url';
-import {wb, colEstilo, contenidoEstilo } from '../config/excel4node.config.js';
-import fs from 'fs';
-import { col } from "sequelize";
 import dayjs from "dayjs";
 
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
-// let date = new Date();
-// let fechaMes = (date.getUTCMonth())+1;
-// let fechaAno = date.getFullYear();
 
 export const registroDeEntrada = async(req,res)=> {
     try{
